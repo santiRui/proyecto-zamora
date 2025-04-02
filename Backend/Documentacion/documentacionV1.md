@@ -54,8 +54,10 @@ Luego al final va a parecer generar token y bueno les va a generar un token medi
 git add README.md
 git commit -m "Se agrega documentación sobre Git"
 git push origin main
-
-
+```
+# Y con esto podan ver que ya esta todo para que puedan subir o modificar cosas 
+Recomendaciones: 
+Para los commit hagan una  buenas descripcion para que sepan porque se sube x cosas  o porque se cambian ciertas cosas 
 
 
 
