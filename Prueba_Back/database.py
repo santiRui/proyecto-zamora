@@ -6,7 +6,7 @@ def get_conexion():
     try:
         connection=psycopg2.connect(user="postgres",
                           password="---",
-                          host='127.0.0.1',
+                          host='---',
                           port='---',
                           database='---'
                           )
