@@ -1,0 +1,12 @@
+<h1> Panel de adminitracion</h1>
+<form method="post" action="{{url_for('crear_usuario')}}">
+    <input type="text" name="nombre" placeholder="nombre" required>       
+    <input type="email" name="email" placeholder="Correo" required>
+    <input type="password" name="password" placeholder="Contraseña" required>
+    <select name="rol">
+        <option value="profesor">Profesor</option>
+        <option value="preceptor">Preceptor</option>
+    </select>
+    <button type="submit"> Crear usuario</button>
+
+</form>
