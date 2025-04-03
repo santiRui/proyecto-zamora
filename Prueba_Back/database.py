@@ -5,10 +5,10 @@ import psycopg2
 def get_conexion():
     try:
         connection=psycopg2.connect(user="postgres",
-                          password="Aban12062007",
+                          password="---",
                           host='127.0.0.1',
-                          port='5432',
-                          database='Escuela'
+                          port='---',
+                          database='---'
                           )
         return connection
     except Exception as error:
