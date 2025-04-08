@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restablecer Contraseña</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        header {
+            background-color: #88B257;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center; 
+        }
+
+        header img {
+            height: 40px;
+            margin-right: 10px; 
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px; 
+            color: white;
+            text-align: left;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 80px); 
+        }
+
+        .form-box {
+            background-color: white;
+            padding: 20px; 
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 450px; 
+            height: 400px; 
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; 
+        }
+
+        .form-box h2 {
+            background-color: #88B257;
+            color: white;
+            padding: 10px;
+            border-radius: 8px 8px 0 0; 
+            margin: 0; 
+        }
+
+        .form-box input {
+            width: calc(100% - 30px); 
+            padding: 10px;
+            margin: 10px auto; 
+            border: 1px solid black;
+            border-radius: 4px;
+        }
+
+        .form-box button {
+            width: calc(100% - 30px); 
+            padding: 10px;
+            margin: 10px auto; 
+            background-color: #88B257;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .form-box button:hover {
+            background-color: #76a048;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="imagenes/logo t3.webp" alt="Logo Técnica 3">
+        <h1>Técnica 3</h1>
+    </header>
+    <div class="container">
+        <div class="form-box">
+            <h2>Restablece tu Contraseña</h2>
+            <div>
+                <input type="text" id="dni" placeholder="Ingrese su DNI (solo números)">
+            </div>
+            <div>
+                <input type="email" id="email" placeholder="Ingrese su Gmail">
+            </div>
+            <button onclick="validateFields()">Continuar</button>
+        </div>
+    </div>
+    <script>
+        function validateFields() {
+            const dni = document.getElementById('dni').value;
+            const email = document.getElementById('email').value;
+
+            if (!dni || !email) {
+                alert('Ambos campos deben estar llenos. Por favor, inténtelo de nuevo.');
+                return;
+            }
+
+            if (!/^\d+$/.test(dni)) {
+                alert('El DNI debe contener solo números. Por favor, inténtelo de nuevo.');
+                return;
+            }
+
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                alert('Ingrese un correo electrónico válido.');
+                return;
+            }
+
+            alert('Datos enviados correctamente.');
+        }
+    </script>
+</body>
+</html>
