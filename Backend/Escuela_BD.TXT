@@ -1,0 +1,177 @@
+BEGIN;
+
+
+CREATE TABLE IF NOT EXISTS public.asistencia
+(
+    id_asistencia integer NOT NULL,
+    fecha timestamp without time zone,
+    estado estado,
+    observaciones character varying(1000) COLLATE pg_catalog."default",
+    dni_estudiante_asistencia integer,
+    CONSTRAINT asistencia_pkey PRIMARY KEY (id_asistencia)
+);
+
+CREATE TABLE IF NOT EXISTS public.calendario
+(
+    id_calendario integer NOT NULL,
+    mes time without time zone,
+    dia date,
+    descripcion character varying(1000) COLLATE pg_catalog."default",
+    hora_inicio time without time zone,
+    hora_final time without time zone,
+    id_curso_calendario integer,
+    CONSTRAINT calendario_pkey PRIMARY KEY (id_calendario)
+);
+
+CREATE TABLE IF NOT EXISTS public.curso
+(
+    id_curso integer NOT NULL,
+    nombre character varying(45) COLLATE pg_catalog."default",
+    apellido character varying(45) COLLATE pg_catalog."default",
+    turno character varying(45) COLLATE pg_catalog."default",
+    ciclo character varying(45) COLLATE pg_catalog."default",
+    especialidad character varying(45) COLLATE pg_catalog."default",
+    CONSTRAINT curso_pkey PRIMARY KEY (id_curso)
+);
+
+CREATE TABLE IF NOT EXISTS public.estudiante
+(
+    dni_estudiante integer NOT NULL,
+    apellido character varying(45) COLLATE pg_catalog."default",
+    nombre character varying(45) COLLATE pg_catalog."default",
+    email character varying(45) COLLATE pg_catalog."default",
+    telefono character varying(15) COLLATE pg_catalog."default",
+    password_estudiante character varying(45) COLLATE pg_catalog."default",
+    CONSTRAINT estudiante_pkey PRIMARY KEY (dni_estudiante)
+);
+
+CREATE TABLE IF NOT EXISTS public.familia
+(
+    dni_familia integer NOT NULL,
+    nombre character varying(45) COLLATE pg_catalog."default",
+    apellido character varying(45) COLLATE pg_catalog."default",
+    email character varying(45) COLLATE pg_catalog."default",
+    telefono character varying(45) COLLATE pg_catalog."default",
+    password_familia character varying(45) COLLATE pg_catalog."default",
+    CONSTRAINT familia_pkey PRIMARY KEY (dni_familia)
+);
+
+CREATE TABLE IF NOT EXISTS public.familia_estudiantes
+(
+    id_familia_estudiantes integer NOT NULL,
+    dni_estudiante_familia_estudiante integer,
+    dni_familia_familia_estudiante integer,
+    CONSTRAINT familia_estudiantes_pkey PRIMARY KEY (id_familia_estudiantes)
+);
+
+CREATE TABLE IF NOT EXISTS public.materia
+(
+    id_materia integer NOT NULL,
+    nombre character varying(45) COLLATE pg_catalog."default",
+    descripcion character varying(1000) COLLATE pg_catalog."default",
+    CONSTRAINT materia_pkey PRIMARY KEY (id_materia)
+);
+
+CREATE TABLE IF NOT EXISTS public.materia_curso
+(
+    id_materia_curso integer NOT NULL,
+    id_curso_material_curso integer,
+    dni_institucion_materia_curso integer,
+    id_materia_materia_curso integer,
+    CONSTRAINT materia_curso_pkey PRIMARY KEY (id_materia_curso)
+);
+
+CREATE TABLE IF NOT EXISTS public.tarea
+(
+    id_tarea integer NOT NULL,
+    descripcion character varying(255) COLLATE pg_catalog."default",
+    fecha_entrega timestamp without time zone,
+    calificaciones integer,
+    titulo character varying(45) COLLATE pg_catalog."default",
+    dni_institucion_tarea integer,
+    id_materia_tarea integer,
+    dni_estudiante_tarea integer,
+    CONSTRAINT tarea_pkey PRIMARY KEY (id_tarea)
+);
+
+CREATE TABLE IF NOT EXISTS public.usuario_institucion
+(
+    dni_institucion integer NOT NULL,
+    nombre character varying(45) COLLATE pg_catalog."default",
+    apellido character varying(45) COLLATE pg_catalog."default",
+    email character varying(45) COLLATE pg_catalog."default",
+    telefono integer,
+    estado roles,
+    CONSTRAINT usuario_institucion_pkey PRIMARY KEY (dni_institucion)
+);
+
+ALTER TABLE IF EXISTS public.asistencia
+    ADD CONSTRAINT fk_dni_estudiante_asistencia FOREIGN KEY (dni_estudiante_asistencia)
+    REFERENCES public.estudiante (dni_estudiante) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE CASCADE;
+
+
+ALTER TABLE IF EXISTS public.calendario
+    ADD CONSTRAINT fk_id_curso_calendario FOREIGN KEY (id_curso_calendario)
+    REFERENCES public.curso (id_curso) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE CASCADE;
+
+
+ALTER TABLE IF EXISTS public.familia_estudiantes
+    ADD CONSTRAINT fk_dni_estudiante_familia_estudiante FOREIGN KEY (dni_estudiante_familia_estudiante)
+    REFERENCES public.estudiante (dni_estudiante) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE CASCADE;
+
+
+ALTER TABLE IF EXISTS public.familia_estudiantes
+    ADD CONSTRAINT fk_dni_familia_familia_estudiante FOREIGN KEY (dni_familia_familia_estudiante)
+    REFERENCES public.familia (dni_familia) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE CASCADE;
+
+
+ALTER TABLE IF EXISTS public.materia_curso
+    ADD CONSTRAINT fk_dni_institucion_materia_curso FOREIGN KEY (dni_institucion_materia_curso)
+    REFERENCES public.usuario_institucion (dni_institucion) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE CASCADE;
+
+
+ALTER TABLE IF EXISTS public.materia_curso
+    ADD CONSTRAINT fk_id_curso_material_curso FOREIGN KEY (id_curso_material_curso)
+    REFERENCES public.curso (id_curso) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE CASCADE;
+
+
+ALTER TABLE IF EXISTS public.materia_curso
+    ADD CONSTRAINT fk_id_materia_materia_curso FOREIGN KEY (id_materia_materia_curso)
+    REFERENCES public.materia (id_materia) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE CASCADE;
+
+
+ALTER TABLE IF EXISTS public.tarea
+    ADD CONSTRAINT fk_dni_estudiante_tarea FOREIGN KEY (dni_estudiante_tarea)
+    REFERENCES public.estudiante (dni_estudiante) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE CASCADE;
+
+
+ALTER TABLE IF EXISTS public.tarea
+    ADD CONSTRAINT fk_dni_institucion_tarea FOREIGN KEY (dni_institucion_tarea)
+    REFERENCES public.usuario_institucion (dni_institucion) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE CASCADE;
+
+
+ALTER TABLE IF EXISTS public.tarea
+    ADD CONSTRAINT fk_id_materia_tarea FOREIGN KEY (id_materia_tarea)
+    REFERENCES public.materia (id_materia) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE CASCADE;
+
+END;
