@@ -1,0 +1,358 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: "Poppins", sans-serif;
+  background-color: #f0f0f0;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 992px) {
+  .page-container {
+    flex-direction: row;
+  }
+}
+
+.login-panel {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 2.5rem 1.5rem;
+  height: 100%;
+  position: relative;
+  z-index: 5;
+  overflow-y: auto;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra todo el contenido del header */
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centra horizontalmente */
+  gap: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.horizontal-centered {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  gap: 10px;
+}
+
+.centered-text {
+  text-align: center;
+}
+
+.logo {
+  flex-shrink: 0; /* No permitir que el logo se reduzca */
+  width: 100px;   /* o 120px según tu preferencia */
+  height: 100px;
+}
+
+
+.horizontal-centered .logo {
+  margin-right: 0;
+}
+
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #4a8c1c;
+  white-space: nowrap;
+  flex: 1;
+  line-height: 1.2;
+}
+
+
+.subtitle {
+  font-size: 1.3rem;
+  color: #666;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 28rem;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 1.25rem;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  font-size: 1.2rem;
+}
+
+.form-input.with-icon {
+  padding-left: 40px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.9rem;
+  padding-right: 2.5rem;
+  border: 1px solid #8bc34a;
+  border-radius: 0.5rem;
+  outline: none;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  border-color: #4a8c1c;
+  box-shadow: 0 0 0 2px rgba(74, 140, 28, 0.2);
+}
+
+.back-to-login {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #4a8c1c;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.back-to-login a {
+  color: #4a8c1c;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.back-to-login a:hover {
+  color: #3a6b15;
+  text-decoration: underline;
+}
+
+.btn {
+  width: 100%;
+  padding: 0.9rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 1.25rem;
+  border: none;
+  outline: none;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  display: block;
+}
+
+.btn-primary {
+  background-color: #8bc34a;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #7cb342;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-panel {
+  flex: 0.8;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .image-panel {
+    display: block;
+    clip-path: ellipse(100% 100% at 100% 50%);
+  }
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #8bc34a;
+}
+
+.full-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.text-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(139, 195, 74, 0.7);
+  padding: 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  z-index: 10;
+  backdrop-filter: blur(2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 80%;
+}
+
+.login-info {
+  font-size: 1.2rem;
+  color: white;
+  margin-bottom: 0.5rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.login-role {
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-text-container {
+  display: none;
+}
+
+@media (max-width: 991px) {
+  body {
+    overflow-y: auto;
+  }
+
+  .page-container {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    background-image: url("Güemes.webp");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 2rem 1rem;
+  }
+
+  .mobile-text-container {
+    display: block;
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    background-color: rgba(139, 195, 74, 0.8);
+    padding: 1.5rem;
+    text-align: center;
+    z-index: 10;
+    margin: 0 auto 2rem auto;
+    border-radius: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(5px);
+  }
+
+  .login-role {
+    font-size: 2.5rem;
+  }
+
+  .login-panel {
+    background-color: rgba(240, 240, 240, 0.95);
+    margin: 0 auto;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    flex: 0;
+    height: auto;
+    max-width: 500px;
+    width: 100%;
+    backdrop-filter: blur(5px);
+  }
+
+  .header-container {
+    margin-bottom: 1.5rem;
+  }
+
+  .logo-container {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  /* Mantener el logo grande también en móvil */
+  .logo {
+    margin-right: 0;
+    width: 100px;
+    height: 100px;
+  }
+
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .mobile-text-container {
+    padding: 1.2rem;
+  }
+
+  .login-role {
+    font-size: 2rem;
+  }
+
+  .login-panel {
+    padding: 1.5rem;
+  }
+
+  /* Asegurar que el título "Recuperar contraseña" esté en un solo renglón */
+  .title {
+    font-size: 1.8rem;
+    white-space: nowrap;
+  }
+
+  /* Mantener el logo grande también en móvil pequeño */
+  .logo {
+    width: 80px;
+    height: 80px;
+  }
+}

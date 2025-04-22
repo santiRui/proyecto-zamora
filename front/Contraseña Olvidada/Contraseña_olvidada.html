@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recuperar Contraseña</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="page-container">
+    <div class="mobile-text-container">
+      <p class="login-info">Usted va a recuperar su contraseña de</p>
+      <h2 class="login-role">Institución</h2>
+    </div>
+
+    <div class="login-panel">
+      <div class="header-container">
+        <div class="logo-container">
+          <div class="logo">
+            <img src="logotec.webp" alt="Logo colegio">
+          </div>
+          <h1 class="title">Recuperar contraseña</h1>
+        </div>
+
+        <p class="subtitle">
+          Ingrese su correo o usuario para recibir instrucciones de recuperación
+        </p>
+      </div>
+
+      <div class="form-container">
+        <form>
+          <div class="form-group">
+            <span class="input-icon">
+              <i class="fa-solid fa-envelope" style="color: #8bc34a;"></i>
+            </span>
+            <input type="text" id="email" class="form-input with-icon" placeholder="Ingrese su correo o usuario">
+          </div>
+
+          <button type="button" class="btn btn-primary">Enviar instrucciones</button>
+
+          <div class="back-to-login">
+            <a href="login_institución.html">Volver a inicio de sesión</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="image-panel">
+      <div class="image-container">
+        <img 
+          src="Güemes.webp"
+          alt="Monumento histórico" 
+          class="full-image">
+        
+        <div class="text-container">
+          <p class="login-info">Usted va a recuperar su contraseña de</p>
+          <h2 class="login-role">Institución</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const emailInput = document.getElementById('email');
+      const submitButton = document.querySelector('.btn-primary');
+      
+      submitButton.addEventListener('click', function() {
+        if (emailInput.value.trim() === '') {
+          alert('Por favor, ingrese su correo o usuario');
+          return;
+        }
+        
+        // Aquí iría la lógica para enviar el correo de recuperación
+        alert('Se han enviado las instrucciones de recuperación a su correo');
+      });
+    });
+  </script>
+</body>
+</html>
