@@ -269,7 +269,7 @@ body {
 }
 
 .login-role {
-  font-size: 3.5rem;
+  font-size: 2.8rem;
   font-weight: bold;
   color: white;
   text-transform: uppercase;
@@ -285,18 +285,18 @@ body {
   body {
     overflow-y: auto;
   }
-  
+
   .page-container {
     flex-direction: column;
     height: auto;
     min-height: 100vh;
-    background-image: url('Güemes.webp');
+    background-image: url("Güemes.webp");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     padding: 2rem 1rem;
   }
-  
+
   .mobile-text-container {
     display: block;
     position: relative;
@@ -311,11 +311,11 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(5px);
   }
-  
+
   .login-role {
     font-size: 2.5rem;
   }
-  
+
   .login-panel {
     background-color: rgba(240, 240, 240, 0.95);
     margin: 0 auto;
@@ -328,26 +328,26 @@ body {
     width: 100%;
     backdrop-filter: blur(5px);
   }
-  
+
   .header-container {
     margin-bottom: 1.5rem;
   }
-  
+
   .logo-container {
     flex-direction: column;
     gap: 0.5rem;
   }
-  
+
   .logo {
     margin-right: 0;
     width: 70px;
     height: 70px;
   }
-  
+
   .title {
     font-size: 2.2rem;
   }
-  
+
   .subtitle {
     font-size: 1.1rem;
   }
@@ -357,23 +357,23 @@ body {
   .page-container {
     padding: 1.5rem 1rem;
   }
-  
+
   .mobile-text-container {
     padding: 1.2rem;
   }
-  
+
   .login-role {
     font-size: 2rem;
   }
-  
+
   .login-panel {
     padding: 1.5rem;
   }
-  
+
   .title {
     font-size: 1.8rem;
   }
-  
+
   .logo {
     width: 60px;
     height: 60px;
