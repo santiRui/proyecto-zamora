@@ -1,0 +1,3 @@
+Suban todos los archivos de front en esta carpeta, la idea es que el nombre sea descriptivo 
+ejemplo: loginFamilia.html, loginInstitucion.html 
+IMPORTANTE LLAMEN: index.html (a la pagina de selecion de institucion o familia)
