@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cambiar Contraseña</title>
-    <link rel="stylesheet" href="nuevacont.css">
+    <title>Restablecer Contraseña</title>
+    <link rel="stylesheet" href="restablecer_contraseña.css">
 </head>
 <body>
     <header>
@@ -13,16 +13,16 @@
     </header>
     <div class="container">
         <div class="form-box">
-            <h2>Nueva Contraseña</h2>
+            <h2>Restablece tu Contraseña</h2>
             <div>
-                <input type="password" id="new-password" placeholder="Nueva contraseña">
+                <input type="text" id="dni" placeholder="Ingrese su DNI (solo números)">
             </div>
             <div>
-                <input type="password" id="confirm-password" placeholder="Confirme contraseña">
+                <input type="email" id="email" placeholder="Ingrese su Gmail">
             </div>
-            <button onclick="validatePasswords()">Confirmar</button>
+            <button onclick="validateFields()">Continuar</button>
         </div>
     </div>
-    <script src="nuevacont.js"></script>
+    <script src="restablecer_contraseña.js"></script>
 </body>
 </html>
