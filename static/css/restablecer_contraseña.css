@@ -55,7 +55,7 @@ header h1 {
     padding-bottom: 10px;
 }
 
-.form-box input[type="password"] {
+.form-box input {
     width: calc(100% - 30px);
     padding: 10px;
     margin: 10px auto;
@@ -78,3 +78,4 @@ header h1 {
 .form-box button:hover {
     background-color: #76a048;
 }
+
