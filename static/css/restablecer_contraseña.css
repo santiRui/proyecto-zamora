@@ -55,7 +55,7 @@ header h1 {
     padding-bottom: 10px;
 }
 
-.form-box input {
+.form-box input[type="password"] {
     width: calc(100% - 30px);
     padding: 10px;
     margin: 10px auto;
