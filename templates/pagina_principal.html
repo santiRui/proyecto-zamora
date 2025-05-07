@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tecnica 3</title>
+  <link rel="icon" type="image/x-icon" href="/static/img/logotec.ico">
+  <link rel="stylesheet" href="/static/css/style_index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    
+    <header class="header">
+      <div class="header-content">
+        <div class="logo-title">
+          <img src="/static/img/LogoEscuela.webp" alt="Logo Escuela" class="school-logo">
+          <h1 class="logo">Escuela de Educación Técnica N°3139</h1>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <h2 class="welcome-title">Bienvenido</h2>
+      
+      <div class="cards-container">
+        
+        <div class="card">
+            <a href="{{ url_for('login_institucional') }}">
+              <div class="card-image">
+                <img src="/static/img/Coles.webp" alt="Institución">
+              </div>
+            
+              <div class="card-footer">
+                <h3 class="card-title">Institución</h3>
+              </div>
+            </a>
+        </div>
+
+        <div class="card">
+            <a href="{{ url_for('login_familiar') }}">
+              <div class="card-image">
+                <img src="/static/img/familia.webp" alt="Familiar">
+              </div>
+            
+              <div class="card-footer">
+                <h3 class="card-title">Familiar</h3>
+              </div>
+            </a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-icons">
+        <div class="icon-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Ubicación</span>
+        </div>
+        <div class="icon-item">
+          <i class="fas fa-phone"></i>
+          <span>Teléfono</span>
+        </div>
+        <div class="icon-item">
+          <i class="fas fa-envelope"></i>
+          <span>Correo</span>
+        </div>
+        <div class="icon-item">
+            <i class="fab fa-facebook-f"></i>
+            <span>Facebook</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

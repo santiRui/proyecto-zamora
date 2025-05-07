@@ -4,16 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inicio de Sesión</title>
-  <link rel="icon" type="image/x-icon" href="/static/img/logotec.ico">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="/static/css/fonts.css">
   <link rel="stylesheet" href="/static/css/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+  <!-- Prueba de commit -->
 </head>
 <body>
   <div class="page-container">
     <div class="mobile-text-container">
       <p class="login-info">Usted va a iniciar sesión como</p>
-      <h2 class="login-role">Institución</h2>
+      <h2 class="login-role">Familiar</h2>
     </div>
 
     <div class="login-panel">
@@ -31,31 +34,31 @@
       </div>
 
       <div class="form-container">
-        <form method="POST" action="/login_institucional">
+        <form>
           <div class="form-group">
             <span class="input-icon">
               <i class="fa-solid fa-id-card" style="color: #8bc34a;"></i>
             </span>
-            <input type="text" id="dni" name="dni" class="form-input with-icon" placeholder="Ingrese su DNI" required>
+            <input type="text" id="dni" class="form-input with-icon" placeholder="Ingrese su DNI">
           </div>
-        
+
           <div class="form-group password-container">
             <span class="input-icon">
               <i class="fa-solid fa-lock" style="color: #8bc34a;"></i>
             </span>
-            <input type="password" id="password" name="password" class="form-input with-icon" placeholder="Ingrese su contraseña" required>
+            <input type="password" id="password" class="form-input with-icon" placeholder="Ingrese su contraseña">
             <button type="button" id="togglePassword" class="toggle-password">
               <i class="fa-solid fa-eye"></i>
             </button>
           </div>
-        
+
           <div class="forgot-password">
             ¿Olvidaste tu contraseña?
           </div>
-        
-          <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
-        
-          <a href="{{ url_for('registro_institucion') }}"><button type="button" class="btn btn-secondary">Registrarse</button></a>
+
+          <button type="button" class="btn btn-primary">Iniciar Sesión</button>
+
+          <button type="button" class="btn btn-secondary">Registrarse</button>
         </form>
       </div>
     </div>
@@ -69,7 +72,7 @@
         
         <div class="text-container">
           <p class="login-info">Usted va a iniciar sesión como</p>
-          <h2 class="login-role">Institución</h2>
+          <h2 class="login-role">Familiar</h2>
         </div>
       </div>
     </div>
