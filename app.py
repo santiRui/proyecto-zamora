@@ -26,15 +26,15 @@ def login_institucional():
         conn.close()
 
         if admin:
-            stored_hashed_password = admin[5]  # La contraseña almacenada en la base de datos
+            stored_hashed_password = admin[5]  # Se guarda en la bd
             if bcrypt.checkpw(password_input.encode('utf-8'), stored_hashed_password.encode('utf-8')):
-                # Contraseña correcta, redirige a la página del panel de administración
+                # Contra
                 return redirect(url_for('pagina_admin'))
             else:
-                
+                # Contraseña incorrecta
                 return "Contraseña incorrecta"
         else:
-            
+            # Usuario no encontrado
             return "Usuario no encontrado"
     return render_template("login_institucional.html")
 
@@ -42,21 +42,21 @@ def login_institucional():
 def pagina_admin():
     return render_template("pagina_admin.html")
 
-# @app.route("/crear_profesor")
-# def crear_profesor():
-#     return render_template("crear_profesor.html")
+@app.route("/crear_profesor")
+def crear_profesor():
+    return render_template("crear_profesor.html")
 
-# @app.route("/crear_directivo")
-# def crear_directivo():
-#     return render_template("crear_directivo.html")
+@app.route("/crear_directivo")
+def crear_directivo():
+    return render_template("crear_directivo.html")
 
-# @app.route("/crear_preceptor")
-# def crear_preceptor():
-#     return render_template("crear_preceptor.html")
+@app.route("/crear_preceptor")
+def crear_preceptor():
+    return render_template("crear_preceptor.html")
 
-# @app.route("/crear_jefe_taller")
-# def crear_jefe_taller():
-#     return render_template("crear_jefe_taller.html")
+@app.route("/crear_jefe_taller")
+def crear_jefe_taller():
+    return render_template("crear_jefe_taller.html")
 
 @app.route("/login_familiar")
 def login_familiar():
