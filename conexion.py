@@ -5,7 +5,7 @@ def get_connection():
             host='localhost',
             database='Escuela2025',  # Nombre de tu base de datos
             user='postgres',
-            password='Aban12062007'  # Cambia esto
+            password='Contraseña'  # Cambia esto
         )
 
         
