@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes de asistencia</title>
+    <link rel="stylesheet" href="/static/css/reportes.css">
+</head>
+<body>
+    <div class="page-container">
+        <div class="page-content">
+            <header>
+                <div class="header-content">
+                    <div class="logo">
+                        <img src="/static/img/logotec.webp" alt="Logo Escuela Técnica">
+                    </div>
+                    <div class="title">
+                        <h1>Reportes de asistencia</h1>
+                        <p>Seleccione una fecha y el tipo de reporte que desea generar</p>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="card">
+                <form>
+                    <div class="date-input">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect>
+                                <line x1="16" x2="16" y1="2" y2="6"></line>
+                                <line x1="8" x2="8" y1="2" y2="6"></line>
+                                <line x1="3" x2="21" y1="10" y2="10"></line>
+                            </svg>
+                        </div>
+                        <input type="date" required name="date">
+                    </div>
+                    
+                    <button type="submit" class="btn">Generar Reporte</button>
+                </form>
+            </div>
+            
+            <div class="card">
+                <h2>Tipos de reportes disponibles</h2>
+                <ul class="report-list">
+                    <li>
+                        <button class="report-btn">
+                            <span class="file-icon">
+                                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-Sr9OZ2LYjgdsY87nZC2jEOjcLSCHZT.webp" alt="PDF" class="file-image">
+                            </span>
+                            <span>Asistencia mensual</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="report-btn">
+                            <span class="file-icon">
+                                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview-Sr9OZ2LYjgdsY87nZC2jEOjcLSCHZT.webp" alt="PDF" class="file-image">
+                            </span>
+                            <span>Asistencia mensual reducida</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="report-btn">
+                            <span class="file-icon">
+                                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview%20%281%29-WcW5o6FdqEyLYJIzSeFu5vU6UQjgMH.webp" alt="Excel" class="file-image">
+                            </span>
+                            <span>Asistencia diaria por cursada</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="report-btn">
+                            <span class="file-icon">
+                                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview%20%281%29-WcW5o6FdqEyLYJIzSeFu5vU6UQjgMH.webp" alt="Excel" class="file-image">
+                            </span>
+                            <span>Asistencia mensual por cursada</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="report-btn">
+                            <span class="file-icon">
+                                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-removebg-preview%20%281%29-WcW5o6FdqEyLYJIzSeFu5vU6UQjgMH.webp" alt="Excel" class="file-image">
+                            </span>
+                            <span>Inasistencia acumulada</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -19,3 +19,4 @@ function validateFields() {
 
     alert('Datos enviados correctamente.');
 }
+ 
