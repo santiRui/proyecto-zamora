@@ -1,4 +1,3 @@
-# HOLA VICTOR MIRA ACTULIZA 
 # Pasos para poder subir a git
 
 ### Primer paso es poder instalar los que es GIT 
