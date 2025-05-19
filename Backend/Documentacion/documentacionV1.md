@@ -59,6 +59,7 @@ git push origin main
 Recomendaciones: 
 Para los commit hagan una  buenas descripcion para que sepan porque se sube x cosas  o porque se cambian ciertas cosas 
 
+Echo por: Aban Santiago
 
 
 
