@@ -5,7 +5,7 @@ def get_connection():
             host='localhost',
             database='Samora',  # Nombre de tu base de datos
             user='postgres',
-            password='Aban12062007'  # Cambia esto
+            password='lauticor'  # Cambia esto
         )
 
         
