@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio de Sesión</title>
+  <link rel="icon" type="image/x-icon" href="/static/img/logotec.ico">
+  <link rel="stylesheet" href="/static/css/fonts.css">
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="page-container">
+    <div class="mobile-text-container">
+      <p class="login-info">Usted va a iniciar sesión como</p>
+      <h2 class="login-role">Institución</h2>
+    </div>
+
+    <div class="login-panel">
+      <div class="header-container">
+        <div class="logo-container">
+          <div class="logo">
+            <img src="/static/img/logotec.webp" alt="Logo colegio">
+          </div>
+          <h1 class="title">Iniciar sesión</h1>
+        </div>
+
+        <p class="subtitle">
+          Ingrese sus datos personales para usar todas las funciones del sitio
+        </p>
+      </div>
+
+      <div class="form-container">
+        <form method="POST" action="/login_institucional">
+          <div class="form-group">
+            <span class="input-icon">
+              <i class="fa-solid fa-id-card" style="color: #8bc34a;"></i>
+            </span>
+            <input type="text" id="dni" name="dni" class="form-input with-icon" placeholder="Ingrese su DNI" required>
+          </div>
+        
+          <div class="form-group password-container">
+            <span class="input-icon">
+              <i class="fa-solid fa-lock" style="color: #8bc34a;"></i>
+            </span>
+            <input type="password" id="password" name="password" class="form-input with-icon" placeholder="Ingrese su contraseña" required>
+            <button type="button" id="togglePassword" class="toggle-password">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        
+          <div class="forgot-password">
+            <a href="/templates/contraseña_olvidada.html">¿Olvidaste tu contraseña?</a>
+          </div>
+        
+          <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+        
+        </form>
+      </div>
+    </div>
+
+    <div class="image-panel">
+      <div class="image-container">
+        <img 
+          src="/static/img/Güemes.webp"
+          alt="Monumento histórico" 
+          class="full-image">
+        
+        <div class="text-container">
+          <p class="login-info">Usted va a iniciar sesión como</p>
+          <h2 class="login-role">Institución</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('togglePassword').addEventListener('click', function() {
+      const passwordInput = document.getElementById('password');
+      const icon = this.querySelector('i');
+      
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      } else {
+        passwordInput.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      }
+    });
+  </script>
+</body>
+</html>
+
