@@ -1,75 +1,108 @@
+from flask import Flask, render_template,request,redirect, flash,session,url_for
 from conexion import get_connection
-from flask import Flask, render_template, request, redirect, url_for
-import bcrypt
+from werkzeug.security import generate_password_hash 
+import psycopg2
 
 app = Flask(__name__)
+app.secret_key = '1234'
 
-@app.route("/")
+@app.route('/')
 def pagina_principal():
-    return render_template("pagina_principal.html")
+    return render_template('pagina_principal.html')
 
-@app.route("/login_institucional", methods=["GET", "POST"])
-def login_institucional():
-    if request.method == "POST":
-        dni = request.form['dni']
-        password_input = request.form['password']
+@app.route('/login_institucional')
+def login_intitucional():
+    return render_template('login_institucional.html')
+    
 
-        # Verificar si el DNI y la contraseña coinciden con los valores predefinidos
-        if dni == '12345678' and password_input == 'admin':
-            return redirect(url_for('pagina_admin'))  # Redirige si DNI y contraseña son correctos
 
-        # Si no, realiza la verificación con la base de datos
-        conn = get_connection()
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM Administradores WHERE dni = %s", (dni,))
-        admin = cursor.fetchone()
-        conn.close()
 
-        if admin:
-            stored_hashed_password = admin[5]  # Se guarda en la bd
-            if bcrypt.checkpw(password_input.encode('utf-8'), stored_hashed_password.encode('utf-8')):
-                # Contra
-                return redirect(url_for('pagina_admin'))
-            else:
-                # Contraseña incorrecta
-                return "Contraseña incorrecta"
-        else:
-            # Usuario no encontrado
-            return "Usuario no encontrado"
-    return render_template("login_institucional.html")
-
-@app.route("/pagina_admin")
-def pagina_admin():
-    return render_template("pagina_admin.html")
-
-@app.route("/crear_profesor")
-def crear_profesor():
-    return render_template("crear_profesor.html")
-
-@app.route("/crear_directivo")
-def crear_directivo():
-    return render_template("crear_directivo.html")
-
-@app.route("/crear_preceptor")
-def crear_preceptor():
-    return render_template("crear_preceptor.html")
-
-@app.route("/crear_jefe_taller")
-def crear_jefe_taller():
-    return render_template("crear_jefe_taller.html")
-
-@app.route("/login_familiar")
+@app.route('/login_familiar', methods=['GET', 'POST'])
 def login_familiar():
-    return render_template("login_familiar.html")
+    if request.method == 'POST':
+        dni = request.form['dni']
+        password = request.form['password']
 
-@app.route('/registro_institucion')
-def registro_institucion():
-    return render_template('registro_institucion.html')
+        try:
+            conn = get_connection()
+            cur = conn.cursor()
+            cur.execute("SELECT dni_familia, password FROM familia WHERE dni_familia = %s", (dni,))
+            resultado = cur.fetchone()
+            cur.close()
+            conn.close()
 
-@app.route('/registro_familiar')
+            if resultado:
+                dni_bd = resultado[0]
+                pass_bd = resultado[1]
+                if password == pass_bd:
+                    session['dni_familia'] = dni_bd
+                    return redirect(url_for('pagina_escolar'))
+                else:
+                    # Contraseña incorrecta
+                    print("Contraseña incorrecta")
+                    return render_template('login_familiar.html')
+                    
+            else:
+                # DNI no registrado
+                print("El dni no existe")
+                return render_template('login_familiar.html')
+
+        except psycopg2.Error as e:
+            print("Error en login:", e)
+            return render_template('login_familiar.html')
+
+    return render_template('login_familiar.html')
+
+@app.route('/contrasena_olvidada', methods=['GET', 'POST'])
+def contrasena_olvidada():
+    if request.method == 'POST':
+        # Aca va la logica 
+        # para mandar el gmail
+        email = request.form.get('email')
+        # Por ahora solo redirigimos 
+        flash('Si su correo está registrado, recibirá un email para recuperar la contraseña.', 'info')
+        return redirect(url_for('login_familiar'))
+    
+    return render_template('contraseña_olvidada.html')
+
+
+@app.route('/pagina_escolar')
+def pagina_escolar():
+    if 'dni_familia' in session:
+        # 
+        return render_template('pagina_escolar.html')  # 
+    else:
+        return redirect(url_for('login_familiar'))
+    
+@app.route('/registro_familiar', methods=['GET', 'POST'])
 def registro_familiar():
+    if request.method == 'POST':
+        dni = request.form['dni']
+        nombre = request.form['nombre']
+        apellido = request.form['apellido']
+        email = request.form['email']
+        telefono = request.form['telefono']
+        password = request.form['password']
+
+        try:
+            conn = get_connection()
+            cur = conn.cursor()
+            cur.execute("""
+                INSERT INTO familia (dni_familia, nombre, apellido, gmail, telefono, password)
+                VALUES (%s, %s, %s, %s, %s, %s)
+            """, (dni, nombre, apellido, email, telefono, password))
+            conn.commit()
+            cur.close()
+            conn.close()
+            flash('Familiar registrado con éxito', 'success')
+            return redirect('/login_familiar')
+        except Exception as e:
+            print("Error al registrar:", e)
+            flash('Error al registrar familiar. Verifica los datos.', 'danger')
+            return redirect('/registro_familiar')
+
     return render_template('registro_familiar.html')
 
 
-if __name__ == "__main__":
-    app.run(port=6990, debug=True)
+if __name__ == '__main__':
+    app.run(port=2232,debug=True)

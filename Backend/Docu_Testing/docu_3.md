@@ -21,12 +21,12 @@ def enviar_correo(gmail, codigo):
     msg['Subject'] = 'Recuperación de Contraseña'
     msg['From'] = '2025pruebax@gmail.com'  # Tu correo de envío
     msg['To'] = gmail
-
+    # EL SMTP ES PROTOCOLO SIMPLE de TRANFERENCIA de Correo
     try:
         # Enviar el mensaje
         with smtplib.SMTP('smtp.gmail.com', 587) as server:
             server.starttls()
-            server.login('2025pruebax@gmail.com', 'tu_contraseña')  # Cambia esto por tu contraseña real
+            server.login('2025pruebax@gmail.com', 'vkvt ibqh uiyr fcpm')  # Cambia esto por tu contraseña real
             server.send_message(msg)
         return "Mensaje enviado exitosamente"
     except Exception as e:

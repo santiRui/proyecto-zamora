@@ -36,7 +36,9 @@ Instalar Flask:
 
 pip install flask
 
+
 ```
+Pagina de documentacion https://flask.palletsprojects.com/en/stable/
 
 ### Crear tu primer servidor Flask
 

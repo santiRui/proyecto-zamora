@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tecnica 3</title>
-  <link rel="icon" type="image/x-icon" href="/static/img/logotec.ico">
-  <link rel="stylesheet" href="/static/css/style_index.css">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/logotec.ico') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style_index.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -14,7 +14,7 @@
     <header class="header">
       <div class="header-content">
         <div class="logo-title">
-          <img src="/static/img/LogoEscuela.webp" alt="Logo Escuela" class="school-logo">
+          <img src="{{ url_for('static', filename='img/LogoEscuela.webp') }}" alt="Logo Escuela" class="school-logo">
           <h1 class="logo">Escuela de Educación Técnica N°3139</h1>
         </div>
       </div>
@@ -26,11 +26,10 @@
       <div class="cards-container">
         
         <div class="card">
-            <a href="/templates/login_institucional.html">
+            <a href="/login_institucional" style="text-decoration:none;color: black;">
               <div class="card-image">
-                <img src="/static/img/Coles.webp" alt="Institución">
+                <img src="{{ url_for('static', filename='img/Coles.webp') }}" alt="Institución">
               </div>
-            
               <div class="card-footer">
                 <h3 class="card-title">Institución</h3>
               </div>
@@ -38,11 +37,10 @@
         </div>
 
         <div class="card">
-            <a href="/templates/login_familiar.html">
+            <a href="/login_familiar "style="text-decoration:none;color: black;">
               <div class="card-image">
-                <img src="/static/img/familia.webp" alt="Familiar">
+                <img src="{{ url_for('static', filename='img/familia.webp') }}" alt="Familiar">
               </div>
-            
               <div class="card-footer">
                 <h3 class="card-title">Familiar</h3>
               </div>
@@ -66,8 +64,8 @@
           <span>Correo</span>
         </div>
         <div class="icon-item">
-            <i class="fab fa-facebook-f"></i>
-            <span>Facebook</span>
+          <i class="fab fa-facebook-f"></i>
+          <span>Facebook</span>
         </div>
       </div>
     </footer>
