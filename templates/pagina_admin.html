@@ -1,22 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inicio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración</title>
+    <link rel="stylesheet" href="static/css/seleccion_de_rol.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <h1>Bienvenido</h1>
-  <p>Has iniciado como admin</p>
+    <div class="page-container">
+        <div class="page-content">
+            <header>
+                <div class="header-content">
+                    <img src="static/img/logotec.webp" alt="Logo Escuela Técnica" class="logo">
+                    <h1>Administración</h1>
+                </div>
+            </header>
+            
+            <div class="buttons-container">
+                    <a href="/templates/crear_rol.html" class="btn btn-green" title="Genera un rol para una cuenta">
+                        Crear Rol
+                </button>
+                
+                <a href="/templates/registro_institucion.html" class="btn btn-yellow" title="Crea una cuenta con capacidades similares a las suyas">
+                    Registrar cuenta de Institucion
+                </button>
 
-  <h3>Opciones de gestión de usuarios:</h3>
-
-  <!-- <ul>
-    <li><a href="{{ url_for('crear_profesor') }}"><button>Crear Profesor</button></a></li>
-    <li><a href="{{ url_for('crear_directivo') }}"><button>Crear Directivo</button></a></li>
-    <li><a href="{{ url_for('crear_preceptor') }}"><button>Crear Preceptor</button></a></li>
-    <li><a href="{{ url_for('crear_jefe_taller') }}"><button>Crear Jefe de Taller</button></a></li>
-  </ul> -->
-
+                <a href="/templates/pagina_escolar.html" class="btn btn-green" title="Volver a la página principal">
+                    Ir al inicio
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
