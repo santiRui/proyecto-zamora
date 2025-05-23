@@ -1,12 +1,10 @@
-/* Estilos básicos y reseteo */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    
-    /* Variables de color */
+
     :root {
     --color-primary: #3e8e41;
     --color-primary-light: #88B257;
@@ -31,7 +29,6 @@
     background-size: 20px 20px;
     }
     
-    /* Contenedor principal */
     .page-container {
     max-width: 900px;
     width: 100%;
@@ -43,7 +40,6 @@
     padding: 2rem;
     border-radius: var(--border-radius);
     position: relative;
-    /* Reemplazamos el borde simple con un borde irregular */
     border: none;
     background-image: 
       linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary-light) 100%),
@@ -52,18 +48,17 @@
       linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary-light) 100%);
     background-repeat: no-repeat;
     background-size: 
-      100% 5px,  /* Top border */
-      5px 100%,  /* Right border */
-      100% 5px,  /* Bottom border */
-      5px 100%;  /* Left border */
+      100% 5px,  
+      5px 100%,  
+      100% 5px,  
+      5px 100%;  
     background-position: 
-      0 0,       /* Top border */
-      100% 0,    /* Right border */
-      0 100%,    /* Bottom border */
-      0 0;       /* Left border */
+      0 0,       
+      100% 0,    
+      0 100%,    
+      0 0;       
     }
     
-    /* Añadimos el efecto de líneas irregulares */
     .page-content::before {
     content: "";
     position: absolute;
@@ -74,7 +69,6 @@
     border-radius: calc(var(--border-radius) + 5px);
     background: transparent;
     z-index: -1;
-    /* Creamos el efecto de líneas irregulares con múltiples sombras */
     box-shadow: 
       2px 2px 0 0 var(--color-primary-light),
       -3px 4px 0 0 var(--color-primary-light),
@@ -87,7 +81,6 @@
     pointer-events: none;
     }
     
-    /* Añadimos más irregularidad con un segundo pseudo-elemento */
     .page-content::after {
     content: "";
     position: absolute;
@@ -102,12 +95,10 @@
     pointer-events: none;
     }
     
-    /* Cabecera */
     header {
     margin-bottom: 3rem;
     padding-bottom: 1rem;
     border-bottom: 2px solid var(--color-primary-light);
-    /* Hacemos que el borde inferior sea irregular */
     border-bottom-style: wavy;
     }
     
@@ -128,7 +119,6 @@
     font-size: 2.5rem;
     }
     
-    /* Contenedor de botones */
     .buttons-container {
     display: flex;
     justify-content: space-between;
@@ -136,7 +126,6 @@
     margin-top: 2rem;
     }
     
-    /* Botones */
     .btn {
     flex: 1;
     padding: 15px 20px;
@@ -178,7 +167,6 @@
     background-color: var(--color-white);
     color: var(--color-primary);
     border: 2px solid var(--color-primary-light);
-    /* Hacemos que el borde sea irregular */
     border-style: dotted solid;
     }
     
@@ -192,7 +180,6 @@
     background-color: var(--color-white);
     color: var(--color-text);
     border: 2px solid var(--color-yellow);
-    /* Hacemos que el borde sea irregular */
     border-style: dotted solid;
     }
     
@@ -201,7 +188,6 @@
     transform: translateY(-3px);
     }
     
-    /* Responsive */
     @media (max-width: 768px) {
     .buttons-container {
         flex-direction: column;
