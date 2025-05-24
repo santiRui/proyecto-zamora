@@ -9,36 +9,73 @@
     <title>Crear Rol</title>
 </head>
 <body>
-<body>
+
 
      <div class="left-panel">
     <h1 class="title"> <img src="/static/img/logotec.webp" alt="icono" class="logo-Tec3">Crear rol</h1>
     <p class="subtitle">Ingrese el nombre del rol</p>
 
     <div class="input-container">
-
+      <form>
+<!--
       <span class="icon">≡</span>
-
+-->
+      <div class="form-group">
+        <input type="text" id="Nombre_Rol" class="form-input" placeholder="Nombre del rol" required>
+      
+      </div>
+      <!--
       <select id="CrearRol">
             <option value="" disabled selected> Crear Rol </option>
             <option value="Rol1">Administrador</option>
             <option value="Rol2">Familiar</option>
             <option value="Rol3">Docente</option>
+            <option value="Rol4">Invitado</option>
         </select>
-    </div>
+        -->
+      <button type="submit" class="btn-regis">Registrar rol</button>
 
-    <a href="#"></a>
-    <button class="btn">Registrar rol</button>
-    </a>
+        </form>
+    </div>
 
   </div>
 
   <div class="right-panel">
-    <div class="circle"></div>
+  <div class="circle"></div>
+
+     <table class="tabla-roles">
+    <thead>
+      <tr>
+        <th>Roles</th>
+        <th colspan="2">Administrar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Administrador</td>
+        <td><i class="fa-solid fa-check text-verde"></i></td>
+        <td><i class="fa-solid fa-xmark text-rojo"></i></td>
+      </tr>
+      <tr>
+        <td>Docente</td>
+        <td><i class="fa-solid fa-check text-verde"></i></td>
+        <td><i class="fa-solid fa-xmark text-rojo"></i></td>
+      </tr>
+      <tr>
+        <td>Familiar</td>
+       <td><i class="fa-solid fa-check text-verde"></i></td>
+        <td><i class="fa-solid fa-xmark text-rojo"></i></td>
+      </tr>
+      <tr>
+        <td>Invitado</td>
+       <td><i class="fa-solid fa-check text-verde"></i></td>
+        <td><i class="fa-solid fa-xmark text-rojo"></i></td>
+      </tr>
+    </tbody>
+  </table>
+  
   </div>
     
 </body>
 
-    
-</body>
 </html>
