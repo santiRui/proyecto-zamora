@@ -9,7 +9,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  font-family: "Poppins", sans-serif;
+  font-family: "Segoe UI", "Poppins", sans-serif;
   background-color: #f0f0f0;
 }
 
@@ -50,31 +50,15 @@ body {
 .logo-container {
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
-}
-
-.horizontal-centered {
-  flex-direction: row;
   justify-content: center;
-  align-items: center;
-  text-align: center;
-  width: 100%;
-  gap: 10px;
-}
-
-.centered-text {
-  text-align: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
 }
 
 .logo {
   width: 70px;
   height: 70px;
-  margin-right: 0; /* Quito el margen derecho para que esté centrado */
   overflow: hidden;
-}
-
-.horizontal-centered .logo {
-  margin-right: 0;
 }
 
 .logo img {
@@ -86,7 +70,7 @@ body {
 .title {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #4a8c1c;
+  color: #4caf50;
   letter-spacing: 0.5px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
@@ -112,17 +96,20 @@ body {
   position: relative;
 }
 
-.input-icon {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  font-size: 1.2rem;
+.form-input {
+  width: 100%;
+  padding: 0.8rem;
+  padding-right: 2.5rem;
+  border: 1px solid #8bc34a;
+  border-radius: 0.5rem;
+  outline: none;
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
 
-.form-input.with-icon {
-  padding-left: 40px;
+.form-input:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
 }
 
 .toggle-password {
@@ -143,37 +130,7 @@ body {
 }
 
 .toggle-password:hover {
-  color: #4a8c1c;
-}
-
-.form-input {
-  width: 100%;
-  padding: 0.8rem;
-  padding-right: 2.5rem;
-  border: 1px solid #8bc34a;
-  border-radius: 0.5rem;
-  outline: none;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-}
-
-.form-input:focus {
-  border-color: #4a8c1c;
-  box-shadow: 0 0 0 2px rgba(74, 140, 28, 0.2);
-}
-
-.forgot-password {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #4a8c1c;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.forgot-password:hover {
-  color: #3a6b15;
-  text-decoration: underline;
+  color: #4caf50;
 }
 
 .btn {
@@ -203,82 +160,118 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.btn-secondary {
-  background-color: white;
-  color: #4a8c1c;
-  border: 1px solid #8bc34a;
-}
-
-.btn-secondary:hover {
-  background-color: #f5f9f0;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-}
-
-.image-panel {
-  flex: 0.8;
+/* Panel de tabla */
+.table-panel {
+  flex: 1;
   position: relative;
   overflow: hidden;
   height: 100%;
   display: none;
+  background-color: #fff;
 }
 
 @media (min-width: 992px) {
-  .image-panel {
+  .table-panel {
     display: block;
-    clip-path: ellipse(100% 100% at 100% 50%);
   }
 }
 
-.image-container {
-  position: relative;
-  width: 100%;
+.table-container {
   height: 100%;
-  background-color: #8bc34a;
-}
-
-.full-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.text-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(139, 195, 74, 0.7);
   padding: 2rem;
-  border-radius: 1rem;
+  overflow-y: auto;
+}
+
+.table-header {
+  margin-bottom: 2rem;
   text-align: center;
-  z-index: 10;
-  backdrop-filter: blur(2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 80%;
 }
 
-.login-info {
-  font-size: 1.2rem;
-  color: white;
-  margin-bottom: 0.5rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.login-role {
-  font-size: 3.5rem;
+.table-header h2 {
+  color: #4caf50;
+  font-size: 2rem;
   font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.table-wrapper {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.users-table thead {
+  background-color: #8bc34a;
   color: white;
+}
+
+.users-table th,
+.users-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.users-table th {
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
+  font-size: 0.8rem;
 }
 
-.mobile-text-container {
-  display: none;
+.users-table tbody tr {
+  transition: background-color 0.3s ease;
 }
 
+.users-table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+.users-table tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.users-table tbody tr:nth-child(even):hover {
+  background-color: #f0f0f0;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin: 0 0.25rem;
+  border-radius: 0.25rem;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.edit-btn {
+  color: #ff9800;
+}
+
+.edit-btn:hover {
+  background-color: rgba(255, 152, 0, 0.1);
+  color: #f57c00;
+}
+
+.delete-btn {
+  color: #f44336;
+}
+
+.delete-btn:hover {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: #d32f2f;
+}
+
+/* Responsive */
 @media (max-width: 991px) {
   body {
     overflow-y: auto;
@@ -287,21 +280,14 @@ body {
   .page-container {
     flex-direction: column;
     min-height: 100vh;
-    background-image: url("Güemes.webp");
-    background-size: cover;
-    background-position: center;
     padding: 1.5rem 1rem;
     overflow-y: auto;
     display: block;
   }
 
-  .mobile-text-container {
-    display: none;
-  }
-
   .login-panel {
     background-color: rgba(240, 240, 240, 0.95);
-    margin: 0 auto;
+    margin: 0 auto 2rem auto;
     border-radius: 1rem;
     padding: 1.5rem;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
@@ -309,6 +295,37 @@ body {
     width: 100%;
     height: auto;
     overflow: visible;
+  }
+
+  .table-panel {
+    display: block;
+    background-color: rgba(255, 255, 255, 0.95);
+    margin: 0 auto;
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    max-width: 500px;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .table-container {
+    padding: 1rem;
+    height: auto;
+  }
+
+  .table-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .users-table {
+    font-size: 0.8rem;
+  }
+
+  .users-table th,
+  .users-table td {
+    padding: 0.5rem;
   }
 
   .header-container {
@@ -322,7 +339,6 @@ body {
   }
 
   .logo {
-    margin-right: 0;
     width: 60px;
     height: 60px;
   }
@@ -376,4 +392,36 @@ body {
     padding: 0.7rem;
     font-size: 1rem;
   }
+
+  .users-table {
+    font-size: 0.7rem;
+  }
+
+  .users-table th,
+  .users-table td {
+    padding: 0.4rem;
+  }
+
+  .action-btn {
+    padding: 0.3rem;
+    font-size: 0.8rem;
+  }
+}
+
+.empty-table-message {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-style: italic;
+  background-color: #f9f9f9;
+}
+
+.users-table tbody:empty::after {
+  content: "No hay usuarios registrados";
+  display: block;
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-style: italic;
+  background-color: #f9f9f9;
 }

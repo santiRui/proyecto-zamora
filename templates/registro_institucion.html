@@ -1,101 +1,108 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registro del Colegio </title>
-  <link rel="icon" type="image/x-icon" href="/static/img/logotec.ico">
-  <link rel="stylesheet" href="/static/css/fonts.css">
-  <link rel="stylesheet" href="/static/css/styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Escolar</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <div class="page-container">
-    <div class="login-panel">
-      <div class="header-container">
-        <div class="logo-container">
-          <img src="/static/img/logotec.webp" alt="Logo colegio" class="logo">
-          <h1 class="title">Registro Escolar</h1>
+    <div class="page-container">
+        <div class="login-panel">
+            <div class="header-container">
+                <div class="logo-container">
+                    <img src="/static/img/logotec.webp" alt="Logo" class="logo">
+                    <h1 class="title">Registro Escolar</h1>
+                </div>
+                <p class="subtitle">Ingrese sus datos personales</p>
+            </div>
+
+            <div class="form-container">
+                <form id="registro-form">
+                    <div class="form-group">
+                        <input type="text" id="dni" name="dni" class="form-input" placeholder="Ingrese su DNI" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" id="nombre" name="nombre" class="form-input" placeholder="Ingrese su nombre" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" id="apellido" name="apellido" class="form-input" placeholder="Ingrese su apellido" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" class="form-input" placeholder="Ingrese su e-mail" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="tel" id="telefono" name="telefono" class="form-input" placeholder="Ingrese su teléfono" required>
+                    </div>
+
+                    <div class="form-group password-container">
+                        <input type="password" id="password" name="password" class="form-input" placeholder="Ingrese su contraseña" required>
+                        <button type="button" class="toggle-password">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+
+                    <div class="form-group password-container">
+                        <input type="password" id="confirm-password" name="verify_password" class="form-input" placeholder="Verifique su contraseña" required>
+                        <button type="button" class="toggle-password">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+
+                    <div class="form-group">
+                        <select id="rol" name="rol" class="form-input" required>
+                            <option value="">Seleccione el rol</option>
+                            <option value="administrador">Administrador</option>
+                            <option value="usuario">Usuario</option>
+                            <option value="familiar">Familiar</option>
+                            <option value="invitado">Invitado</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                </form>
+            </div>
         </div>
-        <p class="subtitle">Ingrese los datos para registrar</p>
-      </div>
 
-      <div class="form-container">
-        <form>
-          <div class="form-group">
-            
-            <input type="text" name="dni" class="form-input" placeholder="Ingrese el DNI" required>
-          </div>
-
-          <div class="form-group">
-            
-            <input type="text" name="nombre" class="form-input" placeholder="Ingrese el nombre" required>
-          </div>
-
-          <div class="form-group">
-            
-            <input type="text" name="apellido" class="form-input" placeholder="Ingrese el apellido" required>
-          </div>
-
-          <div class="form-group">
-            
-            <input type="email" name="email" class="form-input" placeholder="Ingrese el e-mail" required>
-          </div>
-
-          <div class="form-group">
-            
-            <input type="tel" name="telefono" class="form-input" placeholder="Ingrese el teléfono" required>
-          </div>
-
-          <div class="form-group password-container">
-            <!-- Esta parte ban los botones -->
-            <input type="password" name="password" class="form-input" placeholder="Ingrese la contraseña" required>
-            <button type="button" class="toggle-password">
-              <i class="fa-solid fa-eye"></i>
-            </button>
-          </div>
-
-          <div class="form-group password-container">
-            
-            <input type="password" name="verify_password" class="form-input" placeholder="Verifique la contraseña" required>
-            <button type="button" class="toggle-password">
-              <i class="fa-solid fa-eye"></i>
-            </button>
-          </div>
-
-          <div class="form-group">
-            
-            <input type="tel" name="telefono" class="form-input" placeholder="Seleccione el rol" required>
-          </div>
-
-          <button type="submit" class="btn btn-primary">Registrar</button>
-        </form>
-      </div>
+        <div class="table-panel">
+            <div class="table-container">
+                <div class="table-header">
+                    <h2>Usuarios Registrados</h2>
+                </div>
+                <div class="table-wrapper">
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>DNI</th>
+                                <th>Nombre</th>
+                                <th>Rol</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-tbody">
+                          <tr>
+                                <td>12345678</td>
+                                <td>Juan Pérez</td>
+                                <td>Administrador</td>
+                                <td>
+                                    <button class="action-btn edit-btn" title="Editar">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn delete-btn" title="Eliminar">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="image-panel">
-      <div class="image-container">
-        <img src="/static/img/Güemes.webp" alt="Monumento histórico" class="full-image">
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // Manejo de visibilidad de contraseñas
-    document.querySelectorAll('.toggle-password').forEach(button => {
-      button.addEventListener('click', function() {
-        const input = this.previousElementSibling;
-        const icon = this.querySelector('i');
-        
-        if (input.type === 'password') {
-          input.type = 'text';
-          icon.classList.replace('fa-eye', 'fa-eye-slash');
-        } else {
-          input.type = 'password';
-          icon.classList.replace('fa-eye-slash', 'fa-eye');
-        }
-      });
-    });
-  </script>
 </body>
 </html>
