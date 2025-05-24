@@ -1,74 +1,106 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tecnica 3</title>
-  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/logotec.ico') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style_index.css') }}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escuela de Educación Técnica N°3139</title>
+    <link rel="stylesheet" href="/static/css/style_index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    
-    <header class="header">
-      <div class="header-content">
-        <div class="logo-title">
-          <img src="{{ url_for('static', filename='img/LogoEscuela.webp') }}" alt="Logo Escuela" class="school-logo">
-          <h1 class="logo">Escuela de Educación Técnica N°3139</h1>
-        </div>
-      </div>
-    </header>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-title">
+                    <div class="logo-container">
+                        <img src="/static/img/logotec.webp" alt="Logo Escuela" class="school-logo">
+                    </div>
+                    <div class="title-container">
+                        <h1 class="logo">Escuela de Educación Técnica N°3139</h1>
+                        <p class="subtitle">Excelencia Educativa y Formación Técnica</p>
+                    </div>
+                </div>
+            </div>
+        </header>
 
-    <main class="main-content">
-      <h2 class="welcome-title">Bienvenido</h2>
-      
-      <div class="cards-container">
-        
-        <div class="card">
-            <a href="/login_institucional" style="text-decoration:none;color: black;">
-              <div class="card-image">
-                <img src="{{ url_for('static', filename='img/Coles.webp') }}" alt="Institución">
-              </div>
-              <div class="card-footer">
-                <h3 class="card-title">Institución</h3>
-              </div>
-            </a>
-        </div>
+        <main class="main-content">
+            <div class="welcome-section">
+                <h2 class="welcome-title">Bienvenido</h2>
+                <p class="welcome-subtitle">Selecciona tu perfil de acceso</p>
+            </div>
+            
+            <div class="cards-container">
+                <div class="card">
+                    <a href="/templates/login_institucional.html" class="card-link">
+                        <div class="card-image">
+                            <img src="/static/img/Coles.webp" alt="Institución">
+                        </div>
+                        <div class="card-footer">
+                            <h3 class="card-title">Institución</h3>
+                            <p class="card-description">Acceso para personal administrativo y docente</p>
+                        </div>
+                    </a>
+                </div>
 
-        <div class="card">
-            <a href="/login_familiar "style="text-decoration:none;color: black;">
-              <div class="card-image">
-                <img src="{{ url_for('static', filename='img/familia.webp') }}" alt="Familiar">
-              </div>
-              <div class="card-footer">
-                <h3 class="card-title">Familiar</h3>
-              </div>
-            </a>
-        </div>
-      </div>
-    </main>
+                <div class="card">
+                    <a href="/templates/login_familiar.html" class="card-link">
+                        <div class="card-image">
+                            <img src="/static/img/familia.webp" alt="Familiar">
+                        </div>
+                        <div class="card-footer">
+                            <h3 class="card-title">Familiar</h3>
+                            <p class="card-description">Portal para padres y tutores de estudiantes</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </main>
 
-    <footer class="footer">
-      <div class="footer-icons">
-        <div class="icon-item">
-          <i class="fas fa-map-marker-alt"></i>
-          <span>Ubicación</span>
-        </div>
-        <div class="icon-item">
-          <i class="fas fa-phone"></i>
-          <span>Teléfono</span>
-        </div>
-        <div class="icon-item">
-          <i class="fas fa-envelope"></i>
-          <span>Correo</span>
-        </div>
-        <div class="icon-item">
-          <i class="fab fa-facebook-f"></i>
-          <span>Facebook</span>
-        </div>
-      </div>
-    </footer>
-  </div>
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-icons">
+                    <div class="icon-item">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="icon-content">
+                            <span class="icon-title">Ubicación</span>
+                            <span class="icon-subtitle">1600, Caseros 1615, 4400 Salta</span>
+                        </div>
+                    </div>
+                    <div class="icon-item">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="icon-content">
+                            <span class="icon-title">Teléfono</span>
+                            <span class="icon-subtitle">0387 432-0294</span>
+                        </div>
+                    </div>
+                    <div class="icon-item">
+                        <div class="icon-wrapper">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="icon-content">
+                            <span class="icon-title">Correo</span>
+                            <span class="icon-subtitle">tecnica3139@gmail.com</span>
+                        </div>
+                    </div>
+                    <div class="icon-item">
+                        <div class="icon-wrapper">
+                            <i class="fab fa-facebook-f"></i>
+                        </div>
+                        <div class="icon-content">
+                            <span class="icon-title">Facebook</span>
+                            <span class="icon-subtitle">Síguenos en redes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
 </body>
 </html>
