@@ -168,15 +168,32 @@ body {
   font-weight: 500;
 }
 
-.text-verde {
-  color: #4caf50;
-  font-size: 1.5rem;
+.action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 25px;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  }
+
+.edit-btn {
+  color: #ff9800;
 }
 
-.text-rojo {
-  color: #e53935;
-  font-size: 1.5rem;
+.edit-btn:hover {
+  background-color: rgba(255, 152, 0, 0.1);
+  color: #f57c00;
 }
+
+.delete-btn {
+  color: #f44336;
+}
+
+.delete-btn:hover {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: #d32f2f;
+ }
 
 /* Scroll en panel derecho si tabla es larga */
 .right-panel {

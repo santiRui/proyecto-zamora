@@ -17,22 +17,11 @@
 
     <div class="input-container">
       <form>
-<!--
-      <span class="icon">≡</span>
--->
       <div class="form-group">
         <input type="text" id="Nombre_Rol" class="form-input" placeholder="Nombre del rol" required>
       
       </div>
-      <!--
-      <select id="CrearRol">
-            <option value="" disabled selected> Crear Rol </option>
-            <option value="Rol1">Administrador</option>
-            <option value="Rol2">Familiar</option>
-            <option value="Rol3">Docente</option>
-            <option value="Rol4">Invitado</option>
-        </select>
-        -->
+
       <button type="submit" class="btn-regis">Registrar rol</button>
 
         </form>
@@ -43,34 +32,26 @@
   <div class="right-panel">
   <div class="circle"></div>
 
-     <table class="tabla-roles">
+  <table class="tabla-roles">
     <thead>
       <tr>
         <th>Roles</th>
-        <th colspan="2">Administrar</th>
+        <th colspan="2">Acciones</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>Administrador</td>
-        <td><i class="fa-solid fa-check text-verde"></i></td>
-        <td><i class="fa-solid fa-xmark text-rojo"></i></td>
+        <td></td>
+         <td>
+            <button class="action-btn edit-btn" title="Editar">
+             <i class="fas fa-edit"></i>
+             </button>
+            <button class="action-btn delete-btn" title="Eliminar">
+             <i class="fas fa-trash"></i>
+           </button>
+          </td>
       </tr>
-      <tr>
-        <td>Docente</td>
-        <td><i class="fa-solid fa-check text-verde"></i></td>
-        <td><i class="fa-solid fa-xmark text-rojo"></i></td>
-      </tr>
-      <tr>
-        <td>Familiar</td>
-       <td><i class="fa-solid fa-check text-verde"></i></td>
-        <td><i class="fa-solid fa-xmark text-rojo"></i></td>
-      </tr>
-      <tr>
-        <td>Invitado</td>
-       <td><i class="fa-solid fa-check text-verde"></i></td>
-        <td><i class="fa-solid fa-xmark text-rojo"></i></td>
-      </tr>
+      
     </tbody>
   </table>
   
