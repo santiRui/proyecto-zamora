@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro Escolar</title>
-    <link rel="stylesheet" href="/static/css/registro_institucion.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/registro_institucion.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -12,14 +12,14 @@
         <div class="login-panel">
             <div class="header-container">
                 <div class="logo-container">
-                    <img src="/static/img/logotec.webp" alt="Logo" class="logo">
+                    <img src="{{ url_for('static', filename='img/logotec.webp') }}" alt="Logo" class="logo" />
                     <h1 class="title">Registro Escolar</h1>
                 </div>
                 <p class="subtitle">Ingrese sus datos personales</p>
             </div>
 
             <div class="form-container">
-                <form id="registro-form">
+                <form id="registro-form" method="POST" action="{{ url_for('registro_institucion') }}">
                     <div class="form-group">
                         <input type="text" id="dni" name="dni" class="form-input" placeholder="Ingrese su DNI" required>
                     </div>

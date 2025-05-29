@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registro del Familiar</title>
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/logotec.ico') }}">
-  <link rel="stylesheet" href="/static/css/fonts.css">
-  <link rel="stylesheet" href="/static/css/styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/logotec.ico') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/fonts.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
   <div class="page-container">
     <div class="login-panel">
       <div class="header-container">
         <div class="logo-container">
-          <img src="/static/img/logotec.webp" alt="Logo colegio" class="logo">
+          <img src="{{ url_for('static', filename='img/logotec.webp') }}" alt="Logo colegio" class="logo">
           <h1 class="title">Registro Familiar</h1>
         </div>
         <p class="subtitle">Ingrese sus datos personales para registrarse</p>
@@ -64,7 +64,7 @@
 
     <div class="image-panel">
       <div class="image-container">
-        <img src="/static/img/Güemes.webp" alt="Monumento histórico" class="full-image">
+        <img src="{{ url_for('static', filename='img/Güemes.webp') }}" alt="Monumento histórico" class="full-image">
       </div>
     </div>
   </div>

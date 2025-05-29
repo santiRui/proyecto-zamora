@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escuela de Educación Técnica N°3139</title>
-    <link rel="stylesheet" href="/static/css/style_index.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_index.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +16,7 @@
             <div class="header-content">
                 <div class="logo-title">
                     <div class="logo-container">
-                        <img src="/static/img/logotec.webp" alt="Logo Escuela" class="school-logo">
+                        <img src="{{ url_for('static', filename='img/logotec.webp') }}" alt="Logo Escuela" class="school-logo">
                     </div>
                     <div class="title-container">
                         <h1 class="logo">Escuela de Educación Técnica N°3139</h1>
@@ -34,9 +34,9 @@
             
             <div class="cards-container">
                 <div class="card">
-                    <a href="/templates/login_institucional.html" class="card-link">
+                    <a href="{{ url_for('login_institucional') }}" class="card-link">
                         <div class="card-image">
-                            <img src="/static/img/Coles.webp" alt="Institución">
+                            <img src="{{ url_for('static', filename='img/Coles.webp') }}" alt="Institución">
                         </div>
                         <div class="card-footer">
                             <h3 class="card-title">Institución</h3>
@@ -46,9 +46,9 @@
                 </div>
 
                 <div class="card">
-                    <a href="/templates/login_familiar.html" class="card-link">
+                    <a href="{{ url_for('login_familiar') }}" class="card-link">
                         <div class="card-image">
-                            <img src="/static/img/familia.webp" alt="Familiar">
+                            <img src="{{ url_for('static', filename='img/familia.webp') }}" alt="Familiar">
                         </div>
                         <div class="card-footer">
                             <h3 class="card-title">Familiar</h3>

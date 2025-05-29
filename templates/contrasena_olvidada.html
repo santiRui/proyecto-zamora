@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Recuperar Contraseña</title>
-  <link rel="icon" type="image/x-icon" href="/static/img/favicon.webp">
-  <link rel="stylesheet" href="/static/css/fonts.css">
-  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.webp') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/fonts.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -18,7 +18,7 @@
       <div class="header-container">
         <div class="logo-container">
           <div class="logo">
-            <img src="/static/img/logotec.webp" alt="Logo colegio">
+            <img src="{{ url_for('static', filename='img/logotec.webp') }}" alt="Logo colegio">
           </div>
           <h1 class="title">Recuperar contraseña</h1>
         </div>
@@ -29,18 +29,18 @@
       </div>
 
       <div class="form-container">
-        <form>
+        <form method="POST" action="{{ url_for('contrasena_olvidada') }}">
           <div class="form-group">
             <span class="input-icon">
               <i class="fa-solid fa-envelope" style="color: #8bc34a;"></i>
             </span>
-            <input type="text" id="email" class="form-input with-icon" placeholder="Ingrese su correo o usuario">
+            <input type="text" id="email" name="email" class="form-input with-icon" placeholder="Ingrese su correo o usuario">
           </div>
 
-          <button type="button" class="btn btn-primary">Enviar instrucciones</button>
+          <button type="submit" class="btn btn-primary">Enviar instrucciones</button>
 
           <div class="back-to-login">
-            <a href="{{ url_for('login_familiar') }}">Volver al inicio de sesion</a>
+            <a href="{{ url_for('pagina_principal') }}">Volver al inicio de sesión</a>
           </div>
         </form>
       </div>
@@ -49,7 +49,7 @@
     <div class="image-panel">
       <div class="image-container">
         <img 
-          src="/static/img/Güemes.webp"
+          src="{{ url_for('static', filename='img/Güemes.webp') }}"
           alt="Monumento histórico" 
           class="full-image">
         
