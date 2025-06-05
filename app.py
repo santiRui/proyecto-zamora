@@ -7,6 +7,10 @@ from email.message import EmailMessage
 import uuid
 from datetime import datetime, timedelta
 
+#Codigo echo por el equipo de backend Delagado: Aban Santiago
+#Correcion de tipos de roles echo el 5/6 a hrs 13:46 Version del codigo 1.2v 
+
+
 app = Flask(__name__)
 app.secret_key = '1234'
 
@@ -36,10 +40,10 @@ def login_familiar():
                 print(f"Hash guardado: {hash_guardado}, Nombre: {nombre}")
 
                 if check_password_hash(hash_guardado, password):
-                    print("Contraseña correcta. Iniciando sesión...")
                     session['dni_familia'] = dni
                     session['nombre_familia'] = nombre
-                    return redirect(url_for('pagina_escolar'))  # Asegurate que esta ruta exista
+                    session['rol'] = 'familiar'
+                    return redirect(url_for('pagina_escolar'))
                 else:
                     print("Contraseña incorrecta")
                     flash("Contraseña incorrecta.")
@@ -195,18 +199,17 @@ def login_institucional():
             user = cursor.fetchone()
 
             if user and check_password_hash(user[1], password):
-                # Guardar info en sesión
                 session['dni_institu'] = user[0]
-                session['rol'] = user[2]
+                session['rol'] = user[2].lower()  # Guardamos el rol en minusculas
 
-                if user[2] == 'administrador':
+                if session['rol'] == 'administrador':
                     return redirect(url_for('pagina_admin'))
                 else:
                     return redirect(url_for('pagina_escolar'))
             else:
                 flash('DNI o contraseña incorrectos', 'error')
         except Exception as e:
-            flash('Error al iniciar sesión', e)
+            flash(f'Error al iniciar sesión: {str(e)}', 'error')
         finally:
             cursor.close()
             conn.close()
@@ -223,8 +226,11 @@ def pagina_admin():
 
 @app.route('/pagina_escolar')
 def pagina_escolar():
-    if 'rol' in session and session['rol'] != 'administrador':
+    if 'rol' in session and session['rol'] in ['familiar', 'otro']:
+        #Cambio de logica echo en 5/6 2025 No distinguia los tipos de roles 
         return render_template('pagina_escolar.html')
+    elif 'rol' in session and session['rol'] == 'administrador':
+        return redirect(url_for('pagina_admin'))
     else:
         return redirect(url_for('login_institucional'))
     
