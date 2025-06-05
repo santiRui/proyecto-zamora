@@ -132,7 +132,7 @@ def registro_institucion():
         telefono = request.form['telefono']
         password = request.form['password']
         verify_password = request.form['verify_password']
-        rol = request.form['rol']
+        rol = request.form['rol']  # Este valor ahora es: Administrador, Docente, Familiar o Preceptor
 
         print(f"[DEBUG] Recibido: DNI={dni}, nombre={nombre}, apellido={apellido}, email={gmail}, tel={telefono}, rol={rol}")
 
@@ -145,13 +145,14 @@ def registro_institucion():
         cursor = conn.cursor()
 
         try:
-            # Obtener o crear ID del rol
+            # Buscar si el rol ya existe
             cursor.execute("SELECT id_roles FROM roles WHERE nombre_roles = %s", (rol,))
             resultado = cursor.fetchone()
             if resultado:
                 id_rol = resultado[0]
                 print(f"[DEBUG] Rol existente encontrado: ID={id_rol}")
             else:
+                # Insertar el nuevo rol si no existe
                 cursor.execute("INSERT INTO roles (nombre_roles) VALUES (%s) RETURNING id_roles", (rol,))
                 id_rol = cursor.fetchone()[0]
                 print(f"[DEBUG] Nuevo rol insertado: ID={id_rol}")
@@ -186,11 +187,14 @@ def registro_institucion():
 
     return render_template('registro_institucion.html')
 
+
 @app.route('/login_institucional', methods=['GET', 'POST'])
 def login_institucional():
     if request.method == 'POST':
         dni = request.form['dni']
         password = request.form['password']
+
+        print(f"[DEBUG] Intentando login con DNI: {dni}")
 
         conn = get_connection()
         cursor = conn.cursor()
@@ -198,23 +202,39 @@ def login_institucional():
             cursor.execute("SELECT dni_institu, password, roles FROM institucion WHERE dni_institu = %s", (dni,))
             user = cursor.fetchone()
 
+            if user:
+                print(f"[DEBUG] Usuario encontrado. Rol: {user[2]}, Hashed PW: {user[1]}")
+            else:
+                print("[DEBUG] Usuario no encontrado en la base de datos.")
+
             if user and check_password_hash(user[1], password):
                 session['dni_institu'] = user[0]
-                session['rol'] = user[2].lower()  # Guardamos el rol en minusculas
+                session['rol'] = user[2].lower()
+
+                print(f"[DEBUG] Contraseña válida. Rol en sesión: {session['rol']}")
 
                 if session['rol'] == 'administrador':
+                    print("[DEBUG] Redirigiendo a pagina_admin")
                     return redirect(url_for('pagina_admin'))
-                else:
+                elif session['rol'] in ['docente', 'preceptor']:
+                    print("[DEBUG] Redirigiendo a pagina_escolar")
                     return redirect(url_for('pagina_escolar'))
+                else:
+                    print(f"[DEBUG] Rol no autorizado: {session['rol']}")
+                    flash('Rol no autorizado para iniciar sesión', 'error')
+                    return redirect(url_for('login_institucional'))
             else:
+                print("[DEBUG] DNI o contraseña incorrectos")
                 flash('DNI o contraseña incorrectos', 'error')
         except Exception as e:
+            print(f"[ERROR] Excepción en login: {e}")
             flash(f'Error al iniciar sesión: {str(e)}', 'error')
         finally:
             cursor.close()
             conn.close()
 
     return render_template('login_institucional.html')
+
 
 
 @app.route('/pagina_admin')
@@ -226,8 +246,8 @@ def pagina_admin():
 
 @app.route('/pagina_escolar')
 def pagina_escolar():
-    if 'rol' in session and session['rol'] in ['familiar', 'otro']:
-        #Cambio de logica echo en 5/6 2025 No distinguia los tipos de roles 
+    if 'rol' in session and session['rol'] in ['familiar', 'otro', 'preceptor', 'docente']:
+        # Cambio de lógica hecho el 5/6/2025: ahora se distinguen correctamente los roles permitidos
         return render_template('pagina_escolar.html')
     elif 'rol' in session and session['rol'] == 'administrador':
         return redirect(url_for('pagina_admin'))
