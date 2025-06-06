@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registro Escolar</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/registro_institucion.css') }}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
     <div class="page-container">
@@ -19,36 +19,40 @@
             </div>
 
             <div class="form-container">
-                <form id="registro-form" method="POST" action="{{ url_for('registro_institucion') }}">
+                <form id="registro-form" method="POST" 
+                    action="{% if usuario_editar %}{{ url_for('actualizar_usuario', dni=usuario_editar[0]) }}{% else %}{{ url_for('registro_institucion') }}{% endif %}">
+                    
+                    <input type="hidden" name="editar" value="{{ usuario_editar[0] if usuario_editar else '' }}" />
+
                     <div class="form-group">
-                        <input type="text" id="dni" name="dni" class="form-input" placeholder="Ingrese su DNI" required>
+                        <input type="text" id="dni" name="dni" class="form-input" placeholder="Ingrese su DNI" required value="{{ usuario_editar[0] if usuario_editar else '' }}" />
                     </div>
 
                     <div class="form-group">
-                        <input type="text" id="nombre" name="nombre" class="form-input" placeholder="Ingrese su nombre" required>
+                        <input type="text" id="nombre" name="nombre" class="form-input" placeholder="Ingrese su nombre" required value="{{ usuario_editar[1] if usuario_editar else '' }}" />
                     </div>
 
                     <div class="form-group">
-                        <input type="text" id="apellido" name="apellido" class="form-input" placeholder="Ingrese su apellido" required>
+                        <input type="text" id="apellido" name="apellido" class="form-input" placeholder="Ingrese su apellido" required value="{{ usuario_editar[2] if usuario_editar else '' }}" />
                     </div>
 
                     <div class="form-group">
-                        <input type="email" id="email" name="email" class="form-input" placeholder="Ingrese su e-mail" required>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="Ingrese su e-mail" required value="{{ usuario_editar[3] if usuario_editar else '' }}" />
                     </div>
 
                     <div class="form-group">
-                        <input type="tel" id="telefono" name="telefono" class="form-input" placeholder="Ingrese su teléfono" required>
+                        <input type="tel" id="telefono" name="telefono" class="form-input" placeholder="Ingrese su teléfono" required value="{{ usuario_editar[4] if usuario_editar else '' }}" />
                     </div>
 
                     <div class="form-group password-container">
-                        <input type="password" id="password" name="password" class="form-input" placeholder="Ingrese su contraseña" required>
+                        <input type="password" id="password" name="password" class="form-input" placeholder="Ingrese su contraseña" {% if not usuario_editar %}required{% endif %} />
                         <button type="button" class="toggle-password">
                             <i class="fa-solid fa-eye"></i>
                         </button>
                     </div>
 
                     <div class="form-group password-container">
-                        <input type="password" id="confirm-password" name="verify_password" class="form-input" placeholder="Verifique su contraseña" required>
+                        <input type="password" id="confirm-password" name="verify_password" class="form-input" placeholder="Verifique su contraseña" {% if not usuario_editar %}required{% endif %} />
                         <button type="button" class="toggle-password">
                             <i class="fa-solid fa-eye"></i>
                         </button>
@@ -57,14 +61,13 @@
                     <div class="form-group">
                         <select id="rol" name="rol" class="form-input" required>
                             <option value="">Seleccione el rol</option>
-                            <option value="Administrador">Administrador</option>
-                            <option value="Docente">Docente</option>
-                            <option value="Familiar">Familiar</option>
-                            <option value="Preceptor">Preceptor</option>
+                            {% for r in roles %}
+                                <option value="{{ r[1] }}" {% if usuario_editar and usuario_editar[5] == r[1] %}selected{% endif %}>{{ r[1] }}</option>
+                            {% endfor %}
                         </select>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Registrar</button>
+                    <button type="submit" class="btn btn-primary">{{ 'Actualizar' if usuario_editar else 'Registrar' }}</button>
                 </form>
             </div>
         </div>
@@ -85,7 +88,23 @@
                             </tr>
                         </thead>
                         <tbody id="users-tbody">
+                            {% for usuario in usuarios %}
+                            <tr>
+                                <td>{{ usuario[0] }}</td>
+                                <td>{{ usuario[1] }}</td>
+                                <td>{{ usuario[2] }}</td>
+                                <td>
+                                    <form action="{{ url_for('eliminar_usuario', dni=usuario[0]) }}" method="POST" style="display:inline;">
+                                        <button type="submit" class="btn-accion" onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">Eliminar</button>
+                                    </form>
+                                    <form action="{{ url_for('editar_usuario', dni=usuario[0]) }}" method="GET" style="display:inline;">
+                                        <button type="submit" class="btn-accion">Editar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
                         </tbody>
+
                     </table>
                 </div>
             </div>

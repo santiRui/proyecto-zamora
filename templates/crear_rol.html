@@ -1,62 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="/static/css">
-    <link rel="stylesheet" href="../static/css/crear_rol.css">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/crear_rol.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Crear Rol</title>
 </head>
 <body>
 
-
-     <div class="left-panel">
-    <h1 class="title"> <img src="/static/img/logotec.webp" alt="icono" class="logo-Tec3">Crear rol</h1>
+  <div class="left-panel">
+    <h1 class="title">
+      <img src="{{ url_for('static', filename='img/logotec.webp') }}" alt="icono" class="logo-Tec3" />
+      Crear rol
+    </h1>
     <p class="subtitle">Ingrese el nombre del rol</p>
 
     <div class="input-container">
-      <form>
-      <div class="form-group">
-        <input type="text" id="Nombre_Rol" class="form-input" placeholder="Nombre del rol" required>
-      
-      </div>
-
-      <button type="submit" class="btn-regis">Registrar rol</button>
-
-        </form>
+      <form method="POST" action="{{ url_for('crear_rol') }}">
+        <div class="form-group">
+          <input type="text" id="Nombre_Rol" name="nombre_rol" class="form-input" placeholder="Nombre del rol" required />
+        </div>
+        <button type="submit" class="btn-regis">Registrar rol</button>
+      </form>
     </div>
-
   </div>
 
   <div class="right-panel">
-  <div class="circle"></div>
+    <div class="circle"></div>
 
-  <table class="tabla-roles">
-    <thead>
-      <tr>
-        <th>Roles</th>
-        <th colspan="2">Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td></td>
-         <td>
-            <button class="action-btn edit-btn" title="Editar">
-             <i class="fas fa-edit"></i>
-             </button>
-            <button class="action-btn delete-btn" title="Eliminar">
-             <i class="fas fa-trash"></i>
-           </button>
+    <table class="tabla-roles">
+      <thead>
+        <tr>
+          <th>Roles</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for rol in roles %}
+        <tr>
+          <td>{{ rol[1] }}</td>  <!-- nombre_roles -->
+          <td>
+            <!-- Aqui se agregan los roles -->
+            <form method="POST" action="{{ url_for('eliminar_rol', id_rol=rol[0]) }}" style="display:inline;">
+              <button type="submit" class="action-btn delete-btn" title="Eliminar" onclick="return confirm('¿Seguro que deseas eliminar este rol?');">
+                <i class="fas fa-trash"></i>
+              </button>
+            </form>
           </td>
-      </tr>
-      
-    </tbody>
-  </table>
-  
+        </tr>
+        {% else %}
+        <tr><td colspan="2">No hay roles creados aún.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
-    
-</body>
 
+</body>
 </html>

@@ -7,6 +7,9 @@
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/logotec.ico') }}" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/fonts.css') }}" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles copy 2.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/Manejo_Error.css') }}">
+
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 </head>
 <body>
@@ -30,6 +33,16 @@
       </div>
 
       <div class="form-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div id="flash-popup" class="popup {{ messages[0][0] }}">
+              <div class="popup-content">
+                <p>{{ messages[0][1] }}</p>
+                <button id="close-popup">Cerrar</button>
+              </div>
+            </div>
+          {% endif %}
+        {% endwith %}
         <form method="POST" action="{{ url_for('login_familiar') }}">
           <div class="form-group">
             <span class="input-icon">
@@ -104,6 +117,21 @@
         icon.classList.add('fa-eye');
       }
     });
+      // Código para cerrar popup flash manual o automáticamente
+  document.addEventListener('DOMContentLoaded', () => {
+    const closeBtn = document.getElementById('close-popup');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        const popup = document.getElementById('flash-popup');
+        if (popup) popup.style.display = 'none';
+      });
+
+      setTimeout(() => {
+        const popup = document.getElementById('flash-popup');
+        if (popup) popup.style.display = 'none';
+      }, 6000);
+    }
+  });
   </script>
 </body>
 </html>

@@ -7,6 +7,7 @@
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/logotec.ico') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/fonts.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/Manejo_Error.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -31,6 +32,18 @@
       </div>
 
       <div class="form-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% set category, message = messages[-1] %}
+            <div id="flash-popup" class="popup {{ category }}">
+              <div class="popup-content">
+                <p>{{ message }}</p>
+                <button id="close-popup">Aceptar</button>
+              </div>
+            </div>
+          {% endif %}
+        {% endwith %}
+
         <form method="POST" action="{{ url_for('login_institucional') }}" >
           <div class="form-group">
             <span class="input-icon">
@@ -74,22 +87,38 @@
     </div>
   </div>
 
-  <script>
-    document.getElementById('togglePassword').addEventListener('click', function() {
-      const passwordInput = document.getElementById('password');
-      const icon = this.querySelector('i');
-      
-      if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        icon.classList.remove('fa-eye');
-        icon.classList.add('fa-eye-slash');
-      } else {
-        passwordInput.type = 'password';
-        icon.classList.remove('fa-eye-slash');
-        icon.classList.add('fa-eye');
-      }
+<script>
+  // Mostrar / ocultar contraseña
+  document.getElementById('togglePassword').addEventListener('click', function() {
+    const passwordInput = document.getElementById('password');
+    const icon = this.querySelector('i');
+    
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      icon.classList.remove('fa-eye');
+      icon.classList.add('fa-eye-slash');
+    } else {
+      passwordInput.type = 'password';
+      icon.classList.remove('fa-eye-slash');
+      icon.classList.add('fa-eye');
+    }
+  });
+
+  // Cerrar popup flash manual o automáticamente
+  const closeBtn = document.getElementById('close-popup');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      const popup = document.getElementById('flash-popup');
+      if (popup) popup.style.display = 'none';
     });
-  </script>
+
+    // Auto cerrar a los 1 segundos
+    setTimeout(() => {
+      const popup = document.getElementById('flash-popup');
+      if (popup) popup.style.display = 'none';
+    }, 1000);
+  }
+</script>
 </body>
 </html>
 

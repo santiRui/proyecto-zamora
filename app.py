@@ -46,15 +46,16 @@ def login_familiar():
                     return redirect(url_for('pagina_escolar'))
                 else:
                     print("Contraseña incorrecta")
-                    flash("Contraseña incorrecta.")
+                    flash("Contraseña incorrecta.", "error")
             else:
                 print("No se encontró familiar con ese DNI")
-                flash("No se encontró un familiar con ese DNI.")
+                flash("No se encontró un familiar con ese DNI.", "error")
         except Exception as e:
             print(f"Error en inicio de sesión: {e}")
-            flash("Error en el inicio de sesión: " + str(e))
+            flash("Error en el inicio de sesión: " + str(e), "error")
 
     return render_template("login_familiar.html")
+
 
 
 @app.route('/registro_familiar', methods=['GET', 'POST'])
@@ -132,12 +133,9 @@ def registro_institucion():
         telefono = request.form['telefono']
         password = request.form['password']
         verify_password = request.form['verify_password']
-        rol = request.form['rol']  # Este valor ahora es: Administrador, Docente, Familiar o Preceptor
-
-        print(f"[DEBUG] Recibido: DNI={dni}, nombre={nombre}, apellido={apellido}, email={gmail}, tel={telefono}, rol={rol}")
+        rol = request.form['rol']
 
         if password != verify_password:
-            print("[ERROR] Las contraseñas no coinciden.")
             flash("Las contraseñas no coinciden")
             return redirect(url_for('registro_institucion'))
 
@@ -145,17 +143,13 @@ def registro_institucion():
         cursor = conn.cursor()
 
         try:
-            # Buscar si el rol ya existe
             cursor.execute("SELECT id_roles FROM roles WHERE nombre_roles = %s", (rol,))
             resultado = cursor.fetchone()
             if resultado:
                 id_rol = resultado[0]
-                print(f"[DEBUG] Rol existente encontrado: ID={id_rol}")
             else:
-                # Insertar el nuevo rol si no existe
                 cursor.execute("INSERT INTO roles (nombre_roles) VALUES (%s) RETURNING id_roles", (rol,))
                 id_rol = cursor.fetchone()[0]
-                print(f"[DEBUG] Nuevo rol insertado: ID={id_rol}")
 
             hashed_password = generate_password_hash(password)
 
@@ -169,23 +163,120 @@ def registro_institucion():
             ))
 
             conn.commit()
-            print("[INFO] Usuario registrado exitosamente.")
             flash("Registro exitoso")
-            return redirect(url_for('login_institucional'))
+            return redirect(url_for('registro_institucion'))
 
-        except psycopg2.IntegrityError as e:
+        except psycopg2.IntegrityError:
             conn.rollback()
-            print(f"[ERROR] Violación de integridad (DNI duplicado u otro): {e}")
             flash("Ya existe un usuario con ese DNI o correo")
         except Exception as e:
             conn.rollback()
-            print(f"[ERROR] Error inesperado: {e}")
-            flash(f"Error: {str(e)}")
+            flash(f"Error: {e}")
         finally:
             cursor.close()
             conn.close()
 
-    return render_template('registro_institucion.html')
+    # Cargar usuarios y roles para GET y después de POST
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT dni_institu, nombre, roles FROM institucion ORDER BY dni_institu")
+    usuarios = cursor.fetchall()
+
+    cursor.execute("SELECT id_roles, nombre_roles FROM roles ORDER BY nombre_roles")
+    roles = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    return render_template('registro_institucion.html', usuarios=usuarios, roles=roles)
+
+@app.route('/eliminar_usuario/<dni>', methods=['POST'])
+def eliminar_usuario(dni):
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM institucion WHERE dni_institu = %s", (dni,))
+        conn.commit()
+        print(f"[INFO] Usuario con DNI {dni} eliminado correctamente.")
+        flash("Usuario eliminado correctamente")
+    except Exception as e:
+        print(f"[ERROR] Error al eliminar usuario: {e}")
+        flash(f"Error al eliminar el usuario: {str(e)}")
+    finally:
+        cursor.close()
+        conn.close()
+    return redirect(url_for('registro_institucion'))
+
+@app.route('/editar_usuario/<dni>', methods=['GET'])
+def editar_usuario(dni):
+    conn = get_connection()
+    cursor = conn.cursor()
+    try:
+        # Obtener los datos del usuario a editar
+        cursor.execute("""
+            SELECT dni_institu, nombre, apellido, gmail, telefono, roles 
+            FROM institucion WHERE dni_institu = %s
+        """, (dni,))
+        usuario = cursor.fetchone()
+
+        # Obtener lista de usuarios para la tabla
+        cursor.execute("""
+            SELECT i.dni_institu, i.nombre, r.nombre_roles 
+            FROM institucion i 
+            JOIN roles r ON i.id_roles_institu = r.id_roles
+        """)
+        usuarios = cursor.fetchall()
+
+        return render_template(
+            'registro_institucion.html', 
+            usuario_editar=usuario,
+            usuarios=usuarios
+        )
+    except Exception as e:
+        flash(f"Error al cargar datos del usuario: {str(e)}")
+        return redirect(url_for('registro_institucion'))
+    finally:
+        cursor.close()
+        conn.close()
+
+
+@app.route('/actualizar_usuario/<dni>', methods=['POST'])
+def actualizar_usuario(dni):
+    nombre = request.form['nombre']
+    apellido = request.form['apellido']
+    gmail = request.form['email']
+    telefono = request.form['telefono']
+    rol = request.form['rol']
+
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        # Buscar o crear el rol
+        cursor.execute("SELECT id_roles FROM roles WHERE nombre_roles = %s", (rol,))
+        resultado = cursor.fetchone()
+        if resultado:
+            id_rol = resultado[0]
+        else:
+            cursor.execute("INSERT INTO roles (nombre_roles) VALUES (%s) RETURNING id_roles", (rol,))
+            id_rol = cursor.fetchone()[0]
+
+        # Actualizar los datos
+        cursor.execute("""
+            UPDATE institucion 
+            SET nombre=%s, apellido=%s, gmail=%s, telefono=%s, id_roles_institu=%s, roles=%s
+            WHERE dni_institu=%s
+        """, (nombre, apellido, gmail, telefono, id_rol, rol, dni))
+
+        conn.commit()
+        flash("Usuario actualizado correctamente.")
+    except Exception as e:
+        conn.rollback()
+        flash(f"Error al actualizar el usuario: {str(e)}")
+    finally:
+        cursor.close()
+        conn.close()
+    return redirect(url_for('registro_institucion'))
 
 
 @app.route('/login_institucional', methods=['GET', 'POST'])
@@ -206,35 +297,43 @@ def login_institucional():
                 print(f"[DEBUG] Usuario encontrado. Rol: {user[2]}, Hashed PW: {user[1]}")
             else:
                 print("[DEBUG] Usuario no encontrado en la base de datos.")
+                flash('El usuario no existe.', 'error')
 
             if user and check_password_hash(user[1], password):
+                rol_lower = user[2].lower()
+                print(f"[DEBUG] Contraseña válida. Rol: {rol_lower}")
+
                 session['dni_institu'] = user[0]
-                session['rol'] = user[2].lower()
+                session['rol'] = rol_lower
 
-                print(f"[DEBUG] Contraseña válida. Rol en sesión: {session['rol']}")
+                flash('Inicio de sesión exitoso.', 'success')
 
-                if session['rol'] == 'administrador':
+                if rol_lower == 'administrador':
                     print("[DEBUG] Redirigiendo a pagina_admin")
                     return redirect(url_for('pagina_admin'))
-                elif session['rol'] in ['docente', 'preceptor']:
+
+                elif rol_lower == 'familiar':
+                    print("[DEBUG] Rol familiar no permitido en login_institucional")
+                    flash('Acceso denegado: Use el login familiar para este rol.', 'error')
+                    return redirect(url_for('login_institucional'))
+
+                else:
                     print("[DEBUG] Redirigiendo a pagina_escolar")
                     return redirect(url_for('pagina_escolar'))
-                else:
-                    print(f"[DEBUG] Rol no autorizado: {session['rol']}")
-                    flash('Rol no autorizado para iniciar sesión', 'error')
-                    return redirect(url_for('login_institucional'))
+
             else:
                 print("[DEBUG] DNI o contraseña incorrectos")
                 flash('DNI o contraseña incorrectos', 'error')
+
         except Exception as e:
             print(f"[ERROR] Excepción en login: {e}")
             flash(f'Error al iniciar sesión: {str(e)}', 'error')
+
         finally:
             cursor.close()
             conn.close()
 
     return render_template('login_institucional.html')
-
 
 
 @app.route('/pagina_admin')
@@ -246,19 +345,75 @@ def pagina_admin():
 
 @app.route('/pagina_escolar')
 def pagina_escolar():
-    if 'rol' in session and session['rol'] in ['familiar', 'otro', 'preceptor', 'docente']:
-        # Cambio de lógica hecho el 5/6/2025: ahora se distinguen correctamente los roles permitidos
-        return render_template('pagina_escolar.html')
-    elif 'rol' in session and session['rol'] == 'administrador':
-        return redirect(url_for('pagina_admin'))
-    else:
+    if 'rol' not in session:
         return redirect(url_for('login_institucional'))
+
+    rol = session['rol']
+
+    if rol == 'administrador':
+        return redirect(url_for('pagina_admin'))
+
+    if rol == 'familiar':
+        return render_template('pagina_escolar.html')
+
+    # Cualquier otro rol creado dinámicamente entra acá
+    return render_template('pagina_escolar.html')
     
 
-@app.route('/crear_rol')
+@app.route('/crear_rol', methods=['GET', 'POST'])
 def crear_rol():
-    return render_template('crear_rol.html')
+    conn = get_connection()
+    cursor = conn.cursor()
 
+    if request.method == 'POST':
+        nombre_rol = request.form['nombre_rol'].strip()
+
+        if not nombre_rol:
+            flash("El nombre del rol no puede estar vacío")
+            return redirect(url_for('crear_rol'))
+
+        try:
+            # Verificar si el rol ya existe
+            cursor.execute("SELECT id_roles FROM roles WHERE nombre_roles = %s", (nombre_rol,))
+            if cursor.fetchone():
+                flash("El rol ya existe")
+            else:
+                cursor.execute("INSERT INTO roles (nombre_roles) VALUES (%s)", (nombre_rol,))
+                conn.commit()
+                flash("Rol creado correctamente")
+        except Exception as e:
+            conn.rollback()
+            flash(f"Error al crear el rol: {e}")
+
+    # Listar roles para mostrar
+    cursor.execute("SELECT id_roles, nombre_roles FROM roles ORDER BY nombre_roles")
+    roles = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    return render_template('crear_rol.html', roles=roles)
+
+@app.route('/eliminar_rol/<int:id_rol>', methods=['POST'])
+def eliminar_rol(id_rol):
+    conn = get_connection()
+    cursor = conn.cursor()
+    try:
+        # Opcional: verificar que el rol no esté asignado a usuarios
+        cursor.execute("SELECT COUNT(*) FROM institucion WHERE id_roles_institu = %s", (id_rol,))
+        count = cursor.fetchone()[0]
+        if count > 0:
+            flash("No se puede eliminar un rol asignado a usuarios")
+        else:
+            cursor.execute("DELETE FROM roles WHERE id_roles = %s", (id_rol,))
+            conn.commit()
+            flash("Rol eliminado correctamente")
+    except Exception as e:
+        conn.rollback()
+        flash(f"Error al eliminar el rol: {e}")
+    cursor.close()
+    conn.close()
+    return redirect(url_for('crear_rol'))
 
 def enviar_email(destinatario, asunto, contenido_html):
     remitente = "tenican.3139@gmail.com"
