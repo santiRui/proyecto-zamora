@@ -5,17 +5,16 @@
     <title>Asistencia</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/static/css/TomarAsistencia.css">
-    
 </head>
 <body>
 
-    <h1><img src="/static/img/logotec.webp" alt="icono" class="logo-Tec3"> Asistencia</h1>
+    <h1><img src="/static/img/logotec.webp" alt="icono" class="logo-tec"> Asistencia</h1>
 
     <div class="nav-buttons">
         <button class="active"><i class="fa-solid fa-list-check"></i>
-             Tomar Asistencia </button>
+            Tomar Asistencia </button>
         <button><i class="fa-solid fa-flag"></i>
-             Ver Reportes </button>
+            Ver Reportes </button>
     </div>
 
     <hr class="separador">
@@ -25,16 +24,7 @@
         <div class="card">
             <h3>Curso - División<br><span>Ciclo - Turno</span></h3>
             <div class="card-options">
-                <button><i class="fas fa-calendar-day"></i> Por día</button>
-                <button><i class="fa-solid fa-bars"></i> Por espacio</button>
-
-            </div>
-        </div>
-
-        <div class="card">
-            <h3>Curso - División<br><span>Ciclo - Turno</span></h3>
-            <div class="card-options">
-                <button><i class="fas fa-calendar-day"></i> Por día</button>
+                <button class="btn-por-dia" onclick="openAttendanceModal('Curso - División', 'Ciclo - Turno')"><i class="fas fa-calendar-day"></i> Por día</button>
                 <button><i class="fa-solid fa-bars"></i> Por espacio</button>
             </div>
         </div>
@@ -42,7 +32,7 @@
         <div class="card">
             <h3>Curso - División<br><span>Ciclo - Turno</span></h3>
             <div class="card-options">
-                <button><i class="fas fa-calendar-day"></i> Por día</button>
+                <button class="btn-por-dia" onclick="openAttendanceModal('Curso - División', 'Ciclo - Turno')"><i class="fas fa-calendar-day"></i> Por día</button>
                 <button><i class="fa-solid fa-bars"></i> Por espacio</button>
             </div>
         </div>
@@ -50,7 +40,7 @@
         <div class="card">
             <h3>Curso - División<br><span>Ciclo - Turno</span></h3>
             <div class="card-options">
-                <button><i class="fas fa-calendar-day"></i> Por día</button>
+                <button class="btn-por-dia" onclick="openAttendanceModal('Curso - División', 'Ciclo - Turno')"><i class="fas fa-calendar-day"></i> Por día</button>
                 <button><i class="fa-solid fa-bars"></i> Por espacio</button>
             </div>
         </div>
@@ -58,21 +48,219 @@
         <div class="card">
             <h3>Curso - División<br><span>Ciclo - Turno</span></h3>
             <div class="card-options">
-                <button><i class="fas fa-calendar-day"></i> Por día</button>
+                <button class="btn-por-dia" onclick="openAttendanceModal('Curso - División', 'Ciclo - Turno')"><i class="fas fa-calendar-day"></i> Por día</button>
                 <button><i class="fa-solid fa-bars"></i> Por espacio</button>
-
             </div>
         </div>
 
         <div class="card">
             <h3>Curso - División<br><span>Ciclo - Turno</span></h3>
             <div class="card-options">
-                <button><i class="fas fa-calendar-day"></i> Por día</button>
+                <button class="btn-por-dia" onclick="openAttendanceModal('Curso - División', 'Ciclo - Turno')"><i class="fas fa-calendar-day"></i> Por día</button>
+                <button><i class="fa-solid fa-bars"></i> Por espacio</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Curso - División<br><span>Ciclo - Turno</span></h3>
+            <div class="card-options">
+                <button class="btn-por-dia" onclick="openAttendanceModal('Curso - División', 'Ciclo - Turno')"><i class="fas fa-calendar-day"></i> Por día</button>
                 <button><i class="fa-solid fa-bars"></i> Por espacio</button>
             </div>
         </div>
 
     </div>
+
+    <div id="attendanceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Tomar Asistencia</h2>
+                <span class="close" onclick="closeAttendanceModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="attendance-table">
+                    <div class="table-header">
+                        <div class="header-cell">Alumno</div>
+                        <div class="header-cell">Asistencia</div>
+                    </div>
+                    <div class="table-row">
+                        <div class="student-name">Alumno 1</div>
+                        <div class="attendance-buttons">
+                            <div class="attendance-option">
+                                <button class="btn-presente btn-round" onclick="selectAttendance(this, 'presente')"></button>
+                                <span class="btn-label">Presente</span>
+                            </div>
+                            <div class="attendance-option">
+                                <button class="btn-tarde btn-round" onclick="selectAttendance(this, 'tarde')"></button>
+                                <span class="btn-label">Tarde</span>
+                            </div>
+                            <div class="attendance-option">
+                                <button class="btn-ausente btn-round" onclick="selectAttendance(this, 'ausente')"></button>
+                                <span class="btn-label">Ausente</span>
+                            </div>
+                            <div class="attendance-option">
+                                <button class="btn-justificada btn-round" onclick="selectAttendance(this, 'justificada')"></button>
+                                <span class="btn-label">Falta Justificada</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-row">
+                        <div class="student-name">Alumno 2</div>
+                        <div class="attendance-buttons">
+                            <div class="attendance-option">
+                                <button class="btn-presente btn-round" onclick="selectAttendance(this, 'presente')"></button>
+                                <span class="btn-label">Presente</span>
+                            </div>
+                            <div class="attendance-option">
+                                <button class="btn-tarde btn-round" onclick="selectAttendance(this, 'tarde')"></button>
+                                <span class="btn-label">Tarde</span>
+                            </div>
+                            <div class="attendance-option">
+                                <button class="btn-ausente btn-round" onclick="selectAttendance(this, 'ausente')"></button>
+                                <span class="btn-label">Ausente</span>
+                            </div>
+                            <div class="attendance-option">
+                                <button class="btn-justificada btn-round" onclick="selectAttendance(this, 'justificada')"></button>
+                                <span class="btn-label">Falta Justificada</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-row">
+                        <div class="student-name">Alumno 3</div>
+                        <div class="attendance-buttons">
+                            <div class="attendance-option">
+                                <button class="btn-presente btn-round" onclick="selectAttendance(this, 'presente')"></button>
+                                <span class="btn-label">Presente</span>
+                            </div>
+                            <div class="attendance-option">
+                                <button class="btn-tarde btn-round" onclick="selectAttendance(this, 'tarde')"></button>
+                                <span class="btn-label">Tarde</span>
+                            </div>
+                            <div class="attendance-option">
+                                <button class="btn-ausente btn-round" onclick="selectAttendance(this, 'ausente')"></button>
+                                <span class="btn-label">Ausente</span>
+                            </div>
+                            <div class="attendance-option">
+                                <button class="btn-justificada btn-round" onclick="selectAttendance(this, 'justificada')"></button>
+                                <span class="btn-label">Falta Justificada</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-row">
+                        <div class="student-name">Alumno 4</div>
+                        <div class="attendance-buttons">
+                            <div class="attendance-option">
+                                <button class="btn-presente btn-round" onclick="selectAttendance(this, 'presente')"></button>
+                                <span class="btn-label">Presente</span>
+                            </div>
+                            <div class="attendance-option">
+                                <button class="btn-tarde btn-round" onclick="selectAttendance(this, 'tarde')"></button>
+                                <span class="btn-label">Tarde</span>
+                            </div>
+                            <div class="attendance-option">
+                                <button class="btn-ausente btn-round" onclick="selectAttendance(this, 'ausente')"></button>
+                                <span class="btn-label">Ausente</span>
+                            </div>
+                            <div class="attendance-option">
+                                <button class="btn-justificada btn-round" onclick="selectAttendance(this, 'justificada')"></button>
+                                <span class="btn-label">Falta Justificada</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-row">
+                        <div class="student-name">Alumno 5</div>
+                        <div class="attendance-buttons">
+                            <div class="attendance-option">
+                                <button class="btn-presente btn-round" onclick="selectAttendance(this, 'presente')"></button>
+                                <span class="btn-label">Presente</span>
+                            </div>
+                            <div class="attendance-option">
+                                <button class="btn-tarde btn-round" onclick="selectAttendance(this, 'tarde')"></button>
+                                <span class="btn-label">Tarde</span>
+                            </div>
+                            <div class="attendance-option">
+                                <button class="btn-ausente btn-round" onclick="selectAttendance(this, 'ausente')"></button>
+                                <span class="btn-label">Ausente</span>
+                            </div>
+                            <div class="attendance-option">
+                                <button class="btn-justificada btn-round" onclick="selectAttendance(this, 'justificada')"></button>
+                                <span class="btn-label">Falta Justificada</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-row">
+                        <div class="student-name">Alumno 6</div>
+                        <div class="attendance-buttons">
+                            <div class="attendance-option">
+                                <button class="btn-presente btn-round" onclick="selectAttendance(this, 'presente')"></button>
+                                <span class="btn-label">Presente</span>
+                            </div>
+                            <div class="attendance-option">
+                                <button class="btn-tarde btn-round" onclick="selectAttendance(this, 'tarde')"></button>
+                                <span class="btn-label">Tarde</span>
+                            </div>
+                            <div class="attendance-option">
+                                <button class="btn-ausente btn-round" onclick="selectAttendance(this, 'ausente')"></button>
+                                <span class="btn-label">Ausente</span>
+                            </div>
+                            <div class="attendance-option">
+                                <button class="btn-justificada btn-round" onclick="selectAttendance(this, 'justificada')"></button>
+                                <span class="btn-label">Falta Justificada</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-save" onclick="saveAttendance()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openAttendanceModal(curso, ciclo) {
+            const modal = document.getElementById('attendanceModal');
+            const modalTitle = document.getElementById('modalTitle');
+            modalTitle.textContent = `Tomar Asistencia - ${curso} (${ciclo})`;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAttendanceModal() {
+            const modal = document.getElementById('attendanceModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            const buttons = modal.querySelectorAll('.btn-round');
+            buttons.forEach(btn => btn.classList.remove('selected'));
+        }
+
+        function selectAttendance(button, type) {
+            const row = button.closest('.table-row');
+            const buttons = row.querySelectorAll('.btn-round');
+            buttons.forEach(btn => btn.classList.remove('selected'));
+            
+            button.classList.add('selected');
+        }
+
+        function saveAttendance() {
+            alert('Asistencia guardada correctamente');
+            closeAttendanceModal();
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('attendanceModal');
+            if (event.target == modal) {
+                closeAttendanceModal();
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeAttendanceModal();
+            }
+        });
+    </script>
 
 </body>
 </html>
